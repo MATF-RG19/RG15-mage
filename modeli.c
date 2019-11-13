@@ -8,7 +8,7 @@ void modelLika(){
     glColor3f(0, 0, 1);
     glTranslatef(-1, 2.5, 0);
     glScalef(1, 3, 1);
-    glTranslatef(-0.5, 0.5, 0);
+    glTranslatef(-0.5, 0.5, 0.5);
     glutSolidCube(1);
     
     glColor3f(0, 0, 0);
@@ -20,7 +20,7 @@ void modelLika(){
     glColor3f(0, 0, 1);
     glTranslatef(1, 2.5, 0);
     glScalef(1, 3, 1);
-    glTranslatef(0.5, 0.5, 0);
+    glTranslatef(0.5, 0.5, 0.5);
     glutSolidCube(1);
     
     glColor3f(0, 0, 0);
@@ -30,7 +30,7 @@ void modelLika(){
     //glava
     glPushMatrix();
     glColor3f(0, 0, 1);
-    glTranslatef(0, 6, 0);
+    glTranslatef(0, 6, 0.5);
     glutSolidCube(1);
     
     glColor3f(0, 0, 0);
@@ -43,7 +43,7 @@ void modelLika(){
     glColor3f(0, 1, 0);
     glTranslatef(0, 3, 0);
     glScalef(2, 2.5, 1);
-    glTranslatef(0, 0.5, 0);
+    glTranslatef(0, 0.5, 0.5);
     glutSolidCube(1);
     
     glColor3f(0, 0, 0);
@@ -55,7 +55,7 @@ void modelLika(){
     glPushMatrix();
     glColor3f(0, 0, 1);
     glScalef(1, 3, 1);
-    glTranslatef(-0.5, 0.5, 0);
+    glTranslatef(-0.5, 0.5, 0.5);
     glutSolidCube(1);
     
     glColor3f(0, 0, 0);
@@ -67,7 +67,7 @@ void modelLika(){
     glPushMatrix();
     glColor3f(0, 0, 1);
     glScalef(1, 3, 1);
-    glTranslatef(0.5, 0.5, 0);
+    glTranslatef(0.5, 0.5, 0.5);
     glutSolidCube(1);
     
     glColor3f(0, 0, 0);
