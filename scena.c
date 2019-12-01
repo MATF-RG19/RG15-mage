@@ -60,5 +60,17 @@ void scena(){
         glVertex3f(-50, 18, -50);
     glEnd();
     
+    //ograda
+    glPushMatrix();
+    
+        glTranslatef(0, 0, 15);
+        glScalef(25, 1, 1);
+        glTranslatef(0, 2, 0);
+        glColor3f(0.8,0.8,0.8);
+        glutSolidCube(4);
+        glColor3f(0,0,0);
+        glutWireCube(4);
+    glPopMatrix();
+    
     
 }

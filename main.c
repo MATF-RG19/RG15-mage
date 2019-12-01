@@ -1,7 +1,6 @@
 #include <stdlib.h>
-#include <math.h>
 #include "funkcije.h"
-#define PI 3.1415926535
+
 
 static int window_width, window_height;
 
@@ -11,7 +10,7 @@ static void on_display(void);
 
 static float _x = 0;
 static float _z = 0;
-static float _fi = 0;
+static float _fi = 0.25;
 
 
 
@@ -95,8 +94,8 @@ static void on_display(void)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluLookAt(
-            0+_x, 6, 1+_z,
-            0+_x + cos(2*PI*_fi), 6, 2+_z + sin(2*PI*_fi),
+            0+_x, 6, -2+_z,
+            0+_x + 2*cos(2*PI*_fi), 6, -1+_z + 2*sin(2*PI*_fi), //x=1
             0, 1, 0
         );
 
@@ -105,7 +104,33 @@ static void on_display(void)
     modelLika();
     glPopMatrix();
     
+    glPushMatrix();
+    glTranslatef(33.33, 6, -29.08);
+    glRotatef(180, 0, 1,0);
+    munja();
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslatef(-29.33, 6.5, -29.58);
+    vatra();
+    glPopMatrix();
+    
+    
+    glPushMatrix();
+    glTranslatef(2, 6, -29.58);
+    glScalef(0.7, 0.7, 1);
+    glTranslatef(0, 2, 0);
+    pahulja();
+    glPopMatrix();
+    
+    
     scena();
+    
+    altar(-31.33, -31.33);
+    altar(0, -31.33);
+    altar(31.33, -31.33);
+    
+    
     
     
     
