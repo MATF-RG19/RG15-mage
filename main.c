@@ -10,7 +10,11 @@ static void on_display(void);
 
 static float _x = 0;
 static float _z = 0;
-static float _fi = 0.25;
+static float _fi = PI/2;
+static float ugao = 0;
+static float vektorX[2] = {1, 0};
+static float vektorZ[2] = {0, 1};
+
 
 
 
@@ -45,27 +49,41 @@ static void on_keyboard(unsigned char key, int x, int y)
         break;
         
     case 'd':
-        _x -= 1;
+        _x -= vektorX[0];
+        _z -= vektorX[1];
         glutPostRedisplay();
         break;
     case 'a':
-        _x += 1;
+        _x += vektorX[0];
+        _z += vektorX[1];
         glutPostRedisplay();
         break;
     case 'w':
-        _z += 1;
+        _z += vektorZ[1];
+        _x += vektorZ[0];
         glutPostRedisplay();
         break;
     case 's':
-        _z -= 1;
+        _z -= vektorZ[1];
+        _x -= vektorZ[0];
         glutPostRedisplay();
         break;
     case 'e':
         _fi += 0.05;
+        ugao -= 0.05;
+        vektorX[0] = cos(ugao);
+        vektorX[1] = -sin(ugao);
+        vektorZ[0] = sin(ugao);
+        vektorZ[1] = cos(ugao);
         glutPostRedisplay();
         break;
     case 'q':
         _fi -= 0.05;
+        ugao += 0.05;
+        vektorX[0] = cos(ugao);
+        vektorX[1] = -sin(ugao);
+        vektorZ[0] = sin(ugao);
+        vektorZ[1] = cos(ugao);
         glutPostRedisplay();
         break;
     }
@@ -94,13 +112,16 @@ static void on_display(void)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluLookAt(
-            0+_x, 6, -2+_z,
-            0+_x + 2*cos(2*PI*_fi), 6, -1+_z + 2*sin(2*PI*_fi), //x=1
+            1+_x, 7, 0+_z,
+            1+_x + cos(_fi), 7, 0+_z + sin(_fi),
             0, 1, 0
         );
+    
+    
 
     glPushMatrix();
     glTranslatef(1+_x, 0, 0+_z);
+    glRotatef(-(_fi/PI*180-90), 0, 1, 0);
     modelLika();
     glPopMatrix();
     
@@ -137,7 +158,7 @@ static void on_display(void)
     
     //ose
     
-    /*glColor3f(1, 0, 0);
+   /* glColor3f(1, 0, 0);
     glBegin(GL_LINES);
         glVertex3f(0, 0, 0);
         glVertex3f(10000, 0, 0);

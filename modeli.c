@@ -73,6 +73,7 @@ void modelLika(){
     glColor3f(0, 0, 0);
     glutWireCube(1);
     glPopMatrix();
+    
 }
 
 void altar(float x, float y){
