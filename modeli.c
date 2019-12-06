@@ -370,7 +370,7 @@ void pahuljaDeo(){
     
     
     
-    glColor3f(0,0,0.8);
+    glColor3f(0,0.2,1);
     glBegin(GL_POLYGON);
     
         glVertex3f(-0.2,0,0);
