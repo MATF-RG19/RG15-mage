@@ -31,9 +31,19 @@ int main(int argc, char **argv)
     glutReshapeFunc(on_reshape);
     glutDisplayFunc(on_display);
 
-    glClearColor(0.75, 0.75, 0.75, 0);
+    glClearColor(0, 0, 0, 0);
     glEnable(GL_DEPTH_TEST);
-    glLineWidth(2);
+    
+    
+    /*glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);*/
+    
+    
+    //glEnable(GL_NORMALIZE);
+    //glEnable(GL_COLOR_MATERIAL);
+    
+    
+
 
     glutMainLoop();
 
@@ -93,30 +103,35 @@ static void on_reshape(int width, int height)
 {
     window_width = width;
     window_height = height;
+
+
 }
 
 static void on_display(void)
 {
+     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glViewport(0, 0, window_width, window_height);
 
-    glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluPerspective(
             60,
             window_width/(float)window_height,
             0.1, 200);
 
-   
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
     gluLookAt(
             1+_x, 7, 0+_z,
             1+_x + cos(_fi), 7, 0+_z + sin(_fi),
             0, 1, 0
         );
     
+
+    init_lights();
+    
+    
+    scena();
     
 
     glPushMatrix();
@@ -127,7 +142,7 @@ static void on_display(void)
     
     glPushMatrix();
     glTranslatef(33.33, 6, -29.08);
-    glRotatef(180, 0, 1,0);
+    //glRotatef(180, 0, 1,0);
     munja();
     glPopMatrix();
     
@@ -145,7 +160,7 @@ static void on_display(void)
     glPopMatrix();
     
     
-    scena();
+    
     
     altar(-31.33, -31.33);
     altar(0, -31.33);
@@ -180,4 +195,27 @@ static void on_display(void)
 
     
     glutSwapBuffers();
+}
+
+
+void init_lights(){
+    
+    GLfloat light_position[] = { 1, 10, 25, 0 };
+
+    
+    GLfloat light_ambient[] = { 0.1, 0.1, 0.1, 1 };
+
+    
+    GLfloat light_diffuse[] = { 0.7, 0.7, 0.7, 1 };
+
+    
+    GLfloat light_specular[] = { 0.9, 0.9, 0.9, 1 };
+
+    
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
 }

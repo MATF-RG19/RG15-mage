@@ -80,6 +80,15 @@ void altar(float x, float y){
     
     glPushMatrix();
     
+    GLfloat material_ambient[] = { 0.5, 0.5, 0.5, 1 };
+    GLfloat material_diffuse[] = { 0.8, 0.8, 0.8, 1 };
+    GLfloat material_specular[] = { 0, 0, 0, 1 };
+    GLfloat shininess = 20;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material_ambient);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, material_diffuse);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular);
+    glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);
+    
     glTranslatef(x, 0, y);
     glTranslatef(2, 0, 2);
     
@@ -89,8 +98,7 @@ void altar(float x, float y){
         glTranslatef(0, 2, 0);
         glColor3f(0.8,0.8,0.8);
         glutSolidCube(4);
-        glColor3f(0,0,0);
-        glutWireCube(4);
+
     glPopMatrix();
     
     
@@ -104,8 +112,7 @@ void altar(float x, float y){
         glColor3f(0.8,0.8,0.8);
         glutSolidCube(1);
         
-        glColor3f(0,0,0);
-        glutWireCube(1);
+
     
     glPopMatrix();
     
@@ -118,8 +125,7 @@ void altar(float x, float y){
         glTranslatef(0, 2, 0);
         glColor3f(0.8,0.8,0.8);
         glutSolidCube(4);
-        glColor3f(0,0,0);
-        glutWireCube(4);
+
     glPopMatrix();
     
     
@@ -130,7 +136,20 @@ void altar(float x, float y){
 void munja(){
     
     
+    
     glPushMatrix();
+    
+    
+    GLfloat material_ambient[] = { 0.3, 0.3, 0.3, 1 };
+    GLfloat material_diffuse[] = { 1, 1, 0.4, 1 };
+    GLfloat material_specular[] = { 0, 0, 0, 1 };
+    GLfloat shininess = 20;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material_ambient);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, material_diffuse);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular);
+    glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);
+    
+    
     glScalef(0.5,0.5,1);
     glColor3f(1,1,0);
     glBegin(GL_POLYGON);
@@ -313,6 +332,18 @@ void vatra(){
     
     glPushMatrix();
     
+    
+    GLfloat material_ambient[] = { 0.3, 0.3, 0.3, 1 };
+    GLfloat material_diffuse[] = { 1, 0.4, 0.4, 1 };
+    GLfloat material_specular[] = { 0, 0, 0, 1 };
+    GLfloat shininess = 20;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material_ambient);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, material_diffuse);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular);
+    glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);
+    
+    
+    
     glTranslatef(0,0.5,0);
     
     int i;
@@ -418,6 +449,20 @@ void pahuljaDeo(){
 
 void pahulja(){
     
+    glPushMatrix();
+    
+    GLfloat material_ambient[] = { 0.3, 0.3, 0.3, 1 };
+    GLfloat material_diffuse[] = { 0.4, 0.4, 1, 1 };
+    GLfloat material_specular[] = { 0, 0, 0, 1 };
+    GLfloat shininess = 20;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material_ambient);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, material_diffuse);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular);
+    glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);
+    
+    
+    
+    
     float j;
     for(j=0; j<=0.5; j+= 0.01){
         glPushMatrix();
@@ -431,7 +476,9 @@ void pahulja(){
         }
         glPopMatrix();
     }
-        
+     
+     
+    glPopMatrix();
     
 }
 

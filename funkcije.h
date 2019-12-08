@@ -11,3 +11,4 @@ void vatra();
 void vatraDeo(float x);
 void pahuljaDeo();
 void pahulja();
+void init_lights();
