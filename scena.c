@@ -84,8 +84,6 @@ void scena(){
         glTranslatef(0, 2, 0);
         glColor3f(0.8,0.8,0.8);
         glutSolidCube(4);
-        glColor3f(0,0,0);
-        glutWireCube(4);
     glPopMatrix();
     
     glPopMatrix();

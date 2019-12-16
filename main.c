@@ -5,15 +5,22 @@
 static int window_width, window_height;
 
 static void on_keyboard(unsigned char key, int x, int y);
+static void on_keyboard_up(unsigned char key, int x, int y);
 static void on_reshape(int width, int height);
 static void on_display(void);
 
-static float _x = 0;
-static float _z = 0;
-static float _fi = PI/2;
-static float ugao = 0;
-static float vektorX[2] = {1, 0};
-static float vektorZ[2] = {0, 1};
+float _x = 0;
+float _z = 0;
+int animacija_kretanja;
+int animacija_rotiranja;
+float _fi = PI/2;
+float ugao = 0;
+float vektorX[2] = {1, 0};
+float vektorZ[2] = {0, 1};
+int smer_kretanja = 0;
+int smer_rotiranja = 0;
+
+
 
 
 
@@ -28,11 +35,21 @@ int main(int argc, char **argv)
     glutCreateWindow(argv[0]);
 
     glutKeyboardFunc(on_keyboard);
+    glutKeyboardUpFunc(on_keyboard_up);
     glutReshapeFunc(on_reshape);
     glutDisplayFunc(on_display);
+    
+    animacija_kretanja = 0;
+    animacija_rotiranja = 0;
 
     glClearColor(0, 0, 0, 0);
     glEnable(GL_DEPTH_TEST);
+    
+    
+    if (!animacija_kretanja) {
+            glutTimerFunc(TIMER_INTERVAL, on_timer, TIMER_ID);
+            animacija_kretanja = 1;
+        }
     
     
     /*glEnable(GL_BLEND);
@@ -40,7 +57,7 @@ int main(int argc, char **argv)
     
     
     //glEnable(GL_NORMALIZE);
-    //glEnable(GL_COLOR_MATERIAL);
+    glEnable(GL_COLOR_MATERIAL);
     
     
 
@@ -59,45 +76,72 @@ static void on_keyboard(unsigned char key, int x, int y)
         break;
         
     case 'd':
-        _x -= vektorX[0];
-        _z -= vektorX[1];
-        glutPostRedisplay();
+        smer_kretanja = DESNO;
+        
         break;
     case 'a':
-        _x += vektorX[0];
-        _z += vektorX[1];
-        glutPostRedisplay();
+        smer_kretanja = LEVO;
+        
+        
         break;
     case 'w':
-        _z += vektorZ[1];
-        _x += vektorZ[0];
-        glutPostRedisplay();
+        smer_kretanja = NAPRED;
+        
         break;
     case 's':
-        _z -= vektorZ[1];
-        _x -= vektorZ[0];
-        glutPostRedisplay();
+        smer_kretanja = NAZAD;
+        
         break;
     case 'e':
-        _fi += 0.05;
-        ugao -= 0.05;
-        vektorX[0] = cos(ugao);
-        vektorX[1] = -sin(ugao);
-        vektorZ[0] = sin(ugao);
-        vektorZ[1] = cos(ugao);
-        glutPostRedisplay();
+        smer_rotiranja = DESNO;
+        
+        
         break;
     case 'q':
-        _fi -= 0.05;
-        ugao += 0.05;
-        vektorX[0] = cos(ugao);
-        vektorX[1] = -sin(ugao);
-        vektorZ[0] = sin(ugao);
-        vektorZ[1] = cos(ugao);
-        glutPostRedisplay();
+        smer_rotiranja = LEVO;
+        
+        break;
+    case 'x':
+        animacija_kretanja = 0;
+        animacija_rotiranja = 0;
         break;
     }
 }
+
+static void on_keyboard_up(unsigned char key, int x, int y){
+    switch(key){
+    case 27:
+        exit(0);
+        break;
+    case 'w':
+        smer_kretanja = 0;
+        break;
+        
+    case 'a':
+        smer_kretanja = 0;
+        break;
+        
+    case 's':
+        smer_kretanja = 0;
+        break;
+        
+    case 'd':
+        smer_kretanja = 0;
+        break;
+        
+    case 'q':
+        smer_rotiranja = 0;
+        break;
+        
+    case 'e':
+        smer_rotiranja = 0;
+        break;
+        
+    default:
+        break;
+    }
+}
+
 
 static void on_reshape(int width, int height)
 {
@@ -128,7 +172,7 @@ static void on_display(void)
         );
     
 
-    init_lights();
+    //init_lights();
     
     
     scena();
@@ -142,7 +186,7 @@ static void on_display(void)
     
     glPushMatrix();
     glTranslatef(33.33, 6, -29.08);
-    //glRotatef(180, 0, 1,0);
+    glRotatef(180, 0, 1,0);
     munja();
     glPopMatrix();
     
@@ -200,7 +244,7 @@ static void on_display(void)
 
 void init_lights(){
     
-    GLfloat light_position[] = { 1, 10, 25, 0 };
+    GLfloat light_position[] = { 0, 15, 50, 1 };
 
     
     GLfloat light_ambient[] = { 0.1, 0.1, 0.1, 1 };

@@ -159,13 +159,7 @@ void munja(){
         glVertex3f(0,3,0.5);
     glEnd();
     
-    glColor3f(0,0,0);
-    glBegin(GL_LINE_LOOP);
-        glVertex3f(0,3,0);
-        glVertex3f(-1,3,0);
-        glVertex3f(-1,3,0.5);
-        glVertex3f(0,3,0.5);
-    glEnd();
+    
     
     glColor3f(1,1,0);
     glBegin(GL_POLYGON);
@@ -175,13 +169,7 @@ void munja(){
         glVertex3f(-1,3,0.5);
     glEnd();
     
-    glColor3f(0,0,0);
-    glBegin(GL_LINE_LOOP);
-        glVertex3f(-1,3,0);
-        glVertex3f(0,0,0);
-        glVertex3f(0,0,0.5);
-        glVertex3f(-1,3,0.5);
-    glEnd();
+   
     
     glColor3f(1,1,0);
     glBegin(GL_POLYGON);
@@ -191,13 +179,7 @@ void munja(){
         glVertex3f(0,0,0.5);
     glEnd();
     
-    glColor3f(0,0,0);
-    glBegin(GL_LINE_LOOP);
-        glVertex3f(0,0,0);
-        glVertex3f(0,2,0);
-        glVertex3f(0,2,0.5);
-        glVertex3f(0,0,0.5);
-    glEnd();
+    
     
     glColor3f(1,1,0);
     glBegin(GL_POLYGON);
@@ -207,13 +189,7 @@ void munja(){
         glVertex3f(1,2,0.5);
     glEnd();
     
-    glColor3f(0,0,0);
-    glBegin(GL_LINE_LOOP);
-        glVertex3f(0,0,0);
-        glVertex3f(0,2,0);
-        glVertex3f(0,2,0.5);
-        glVertex3f(0,0,0.5);
-    glEnd();
+    
     
     glColor3f(1,1,0);
     glBegin(GL_POLYGON);
@@ -223,13 +199,7 @@ void munja(){
         glVertex3f(0,5,0.5);
     glEnd();
     
-    glColor3f(0,0,0);
-    glBegin(GL_LINE_LOOP);
-        glVertex3f(0,5,0);
-        glVertex3f(1,2,0);
-        glVertex3f(1,2,0.5);
-        glVertex3f(0,5,0.5);
-    glEnd();
+   
     
     glColor3f(1,1,0);
     glBegin(GL_POLYGON);
@@ -239,13 +209,7 @@ void munja(){
         glVertex3f(0,5,0.5);
     glEnd();
     
-    glColor3f(0,0,0);
-    glBegin(GL_LINE_LOOP);
-        glVertex3f(0,5,0);
-        glVertex3f(0,3,0);
-        glVertex3f(0,3,0.5);
-        glVertex3f(0,5,0.5);
-    glEnd();
+   
     
     glColor3f(1,1,0);
     glBegin(GL_POLYGON);
@@ -258,39 +222,30 @@ void munja(){
     glEnd();
     
     
-    glColor3f(0,0,0);
-    glBegin(GL_LINE_LOOP);
-        glVertex3f(0,3,0);
-        glVertex3f(-1,3,0);
-        glVertex3f(0,0,0);
-        glVertex3f(0,2,0);
-        glVertex3f(1,2,0);
-        glVertex3f(0,5,0);
-    glEnd();
+ 
     
     
     glPushMatrix();
     glTranslatef(0, 0, 0.5);
     glColor3f(1,1,0);
     glBegin(GL_POLYGON);
-        glVertex3f(0,3,0);
+        /*glVertex3f(0,3,0);
         glVertex3f(-1,3,0);
         glVertex3f(0,0,0);
         glVertex3f(0,2,0);
         glVertex3f(1,2,0);
-        glVertex3f(0,5,0);
-    glEnd();
-    
-    
-    glColor3f(0,0,0);
-    glBegin(GL_LINE_LOOP);
+        glVertex3f(0,5,0);*/
+        
         glVertex3f(0,3,0);
-        glVertex3f(-1,3,0);
-        glVertex3f(0,0,0);
-        glVertex3f(0,2,0);
-        glVertex3f(1,2,0);
         glVertex3f(0,5,0);
+        glVertex3f(1,2,0);
+        glVertex3f(0,2,0);
+        glVertex3f(0,0,0);
+        glVertex3f(-1,3,0);
     glEnd();
+    
+    
+   
     glPopMatrix();
     
     glPopMatrix();
