@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "funkcije.h"
+#include "header.h"
 
 void scena(){
     
@@ -77,14 +77,14 @@ void scena(){
     glEnd();
     
     //ograda
-    glPushMatrix();
+    /*glPushMatrix();
     
         glTranslatef(0, 0, 15);
         glScalef(25, 1, 1);
         glTranslatef(0, 2, 0);
         glColor3f(0.8,0.8,0.8);
         glutSolidCube(4);
-    glPopMatrix();
+    glPopMatrix();*/
     
     glPopMatrix();
     

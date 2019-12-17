@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "funkcije.h"
+#include "header.h"
 
 void modelLika(){
     
@@ -28,14 +28,14 @@ void modelLika(){
     glPopMatrix();
     
     //glava
-    glPushMatrix();
+    /*glPushMatrix();
     glColor3f(0, 0, 1);
     glTranslatef(0, 6, 0.5);
     glutSolidCube(1);
     
     glColor3f(0, 0, 0);
     glutWireCube(1);
-    glPopMatrix();
+    glPopMatrix();*/
     
         
     //torzo
@@ -76,7 +76,7 @@ void modelLika(){
     
 }
 
-void altar(float x, float y){
+void altar(float x, float z){
     
     glPushMatrix();
     
@@ -89,8 +89,8 @@ void altar(float x, float y){
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular);
     glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);
     
-    glTranslatef(x, 0, y);
-    glTranslatef(2, 0, 2);
+    glTranslatef(2+x, 0, 2+z);
+    
     
     //postolje
     glPushMatrix();
@@ -437,11 +437,114 @@ void pahulja(){
     
 }
 
+void magic_circle(float x, float z){
+    
+    
+    glPushMatrix();
+    
+    glTranslatef(x, 0, z);
+    
+    int i;
+    for(i=0; i < NUMBER_OF_DOTS; i++){
+        glColor3f(1,1,1);
+        glBegin(GL_POINTS);
+        glVertex3f(2*cos(i*2*PI/NUMBER_OF_DOTS),
+                   0.05,
+                   2*sin(i*2*PI/NUMBER_OF_DOTS));
+
+        glVertex3f(1.7*cos(i*2*PI/NUMBER_OF_DOTS),
+                   0.05,
+                   1.7*sin(i*2*PI/NUMBER_OF_DOTS));
+        glEnd();
+    }
+    
+    glBegin(GL_LINE_LOOP);
+        glVertex3f(0, 0.05, 2);
+        glVertex3f(-2, 0.05, 0);
+        glVertex3f(0, 0.05, -2);
+        glVertex3f(2, 0.05, 0);
+    glEnd();
+    
+    glBegin(GL_LINE_LOOP);
+        glVertex3f(-1, 0.05, 1);
+        glVertex3f(-1, 0.05, -1);
+        glVertex3f(1, 0.05, -1);
+        glVertex3f(1, 0.05, 1);
+    glEnd();
+    glPopMatrix();
+}
 
 
+void magic_circle2(float x, float z){
+    
+    
+    glPushMatrix();
+    
+    glTranslatef(x, 3, z);
+    glRotatef(-(_fi/PI*180-90), 0, 1, 0);
+    glRotatef(90, 1, 0, 0);
+    glScalef(brojac/50.0, 1, brojac/50.0);
+    int i;
+    for(i=0; i < NUMBER_OF_DOTS; i++){
+        glColor3f(1,1,1);
+        glBegin(GL_POINTS);
+        glVertex3f(2*cos(i*2*PI/NUMBER_OF_DOTS),
+                   0.05,
+                   2*sin(i*2*PI/NUMBER_OF_DOTS));
+
+        glVertex3f(1.7*cos(i*2*PI/NUMBER_OF_DOTS),
+                   0.05,
+                   1.7*sin(i*2*PI/NUMBER_OF_DOTS));
+        glEnd();
+    }
+    
+    glBegin(GL_LINE_LOOP);
+        glVertex3f(0, 0.05, 2);
+        glVertex3f(-2, 0.05, 0);
+        glVertex3f(0, 0.05, -2);
+        glVertex3f(2, 0.05, 0);
+    glEnd();
+    
+    glBegin(GL_LINE_LOOP);
+        glVertex3f(-1, 0.05, 1);
+        glVertex3f(-1, 0.05, -1);
+        glVertex3f(1, 0.05, -1);
+        glVertex3f(1, 0.05, 1);
+    glEnd();
+    glPopMatrix();
+}
+
+void set_normal_and_vertex(float u, float v)
+{
+    glNormal3f(
+            sin(u) * sin(v),
+            cos(u),
+            sin(u) * cos(v)
+            );
+    glVertex3f(
+            sin(u) * sin(v),
+            cos(u),
+            sin(u) * cos(v)
+            );
+}
+
+void lopta(){ //preuzet kod sa casa
+    float u, v;
+
+    glPushMatrix();
 
 
+    for (u = 0; u < PI; u += PI / 20) {
+        glBegin(GL_TRIANGLE_STRIP);
+        for (v = 0; v <= PI*2 + 0.01; v += PI / 20) {
+            set_normal_and_vertex(u, v);
+            set_normal_and_vertex(u + PI / 20, v);
+        }
+        glEnd();
+    }
 
+    glPopMatrix();
+}
 
 
 

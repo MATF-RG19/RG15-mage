@@ -1,11 +1,13 @@
 #include <stdlib.h>
-#include "funkcije.h"
+#include "header.h"
 
 void on_timer(int value){
 
 
     if (value != TIMER_ID)
         return;
+    
+    parametar_animacije++;
 
     switch(smer_kretanja){
         case LEVO:
@@ -51,6 +53,19 @@ void on_timer(int value){
             break;
     }
     
+    if(niz.aktivno){
+        if(brojac < 50){
+            brojac++; 
+        } else {
+            niz.x += niz.vec_x;
+            niz.z += niz.vec_z;
+        }
+    }
+    
+    if(niz.z > 100){
+        niz.aktivno = 0;
+    }
+    
     
     glutPostRedisplay();
 
@@ -58,5 +73,17 @@ void on_timer(int value){
         glutTimerFunc(TIMER_INTERVAL, on_timer, TIMER_ID);
     }
 }
+
+/*void on_timer_magija (int value){
+    if (value != TIMER_MAGIJA_ID)
+        return;
+    
+    int i;
+    for(i = 0; i<100000000; i++);
+
+    if (animacija_magija) {
+        glutTimerFunc(TIMER_INTERVAL, on_timer_magija, TIMER_MAGIJA_ID);
+    }
+}*/
 
 
