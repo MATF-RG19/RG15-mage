@@ -21,6 +21,8 @@ int smer_kretanja = 0;
 int smer_rotiranja = 0;
 float parametar_animacije = 0;
 int brojac = 0;
+static float ugao2 = PI/2;
+static int element = 0;
 
 Magija niz;
 
@@ -29,8 +31,7 @@ Magija niz;
 
 
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv){
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);
 
@@ -59,6 +60,7 @@ int main(int argc, char **argv)
     
     //glEnable(GL_NORMALIZE);
     glEnable(GL_COLOR_MATERIAL);
+    //glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 1);
     
     
 
@@ -68,8 +70,7 @@ int main(int argc, char **argv)
     return 0;
 }
 
-static void on_keyboard(unsigned char key, int x, int y)
-{
+static void on_keyboard(unsigned char key, int x, int y){
     switch (key) {
         
     case 27:
@@ -77,39 +78,53 @@ static void on_keyboard(unsigned char key, int x, int y)
         break;
         
     case 'd':
+    case 'D':
         smer_kretanja = DESNO;
         
         break;
     case 'a':
+    case 'A':
         smer_kretanja = LEVO;
-        
-        
+
         break;
     case 'w':
+    case 'W':    
         smer_kretanja = NAPRED;
         
         break;
     case 's':
+    case 'S':
         smer_kretanja = NAZAD;
         
         break;
     case 'e':
+    case 'E':
         smer_rotiranja = DESNO;
         
         
         break;
     case 'q':
+    case 'Q':    
         smer_rotiranja = LEVO;
         
         break;
     case 'f':
-        brojac = 0;
-        niz.aktivno = 1;
-        niz.x = _x;
-        niz.z = _z;
-        /*niz.vec_x = vektorZ[0];
-        niz.vec_z = vektorZ[1];*/
+    case 'F': 
+        if(element){
+            brojac = 0;
+            niz.aktivno = 1;
+            niz.x = _x;
+            niz.z = _z;
+        }
         break;
+        
+    case 'r':
+    case 'R':
+        if(_x > -31.33 && _x < -27.33 && _z > -26.33 && _z < -22.33){
+            element = VATRA;
+        } else if(_x > 0 && _x < 4 && _z > -26.33 && _z < -22.33){
+            element = LED;
+        }
     }
 }
 
@@ -119,26 +134,32 @@ static void on_keyboard_up(unsigned char key, int x, int y){
         exit(0);
         break;
     case 'w':
+    case 'W':    
         smer_kretanja = 0;
         break;
         
     case 'a':
+    case 'A':    
         smer_kretanja = 0;
         break;
         
     case 's':
+    case 'S':    
         smer_kretanja = 0;
         break;
         
     case 'd':
+    case 'D':    
         smer_kretanja = 0;
         break;
         
     case 'q':
+    case 'Q':    
         smer_rotiranja = 0;
         break;
         
     case 'e':
+    case 'E':    
         smer_rotiranja = 0;
         break;
         
@@ -148,16 +169,14 @@ static void on_keyboard_up(unsigned char key, int x, int y){
 }
 
 
-static void on_reshape(int width, int height)
-{
+static void on_reshape(int width, int height){
     window_width = width;
     window_height = height;
 
 
 }
 
-static void on_display(void)
-{
+static void on_display(void){
      
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -171,14 +190,14 @@ static void on_display(void)
             0.1, 200);
 
     gluLookAt(
-            1+_x, 6, 0+_z,
-            1+_x + cos(_fi), 6, 0+_z + sin(_fi),
+            1+_x, 6.5, _z,
+            1+_x + cos(_fi), 6.5, _z + sin(_fi),
             0, 1, 0
         );
     
 
     //init_lights();
-    
+
     
     scena();
     
@@ -187,6 +206,31 @@ static void on_display(void)
     glTranslatef(1+_x, 0, 0+_z);
     glRotatef(-(_fi/PI*180-90), 0, 1, 0);
     modelLika();
+    
+    if(element){
+        
+        
+        glPushMatrix();
+        
+        switch(element){
+            case VATRA: glColor3f(1,0,0); break;
+            case LED: glColor3f(0.4,0.4,1); break;
+            case MUNJA: glColor3f(1,1,0); break;
+            default: break;
+        }
+        
+        glRotatef(5, 1, 0, 0);
+        glRotatef(-5, 0, 0, 1);
+        
+        glTranslatef(-1.65, 5.6, 3);
+        glRotatef((parametar_animacije)/5, 0, 1, 0);
+        glScalef(0.25, 1, 0.25);
+        glTranslatef(0, -0.05, 0);
+        magic_circle(0, 0);
+        
+        glPopMatrix();
+
+    }
     glPopMatrix();
     
     glPushMatrix();
@@ -209,35 +253,60 @@ static void on_display(void)
     glPopMatrix();
     
     
+    //kvadrat
+    /*glPushMatrix();
+    
+    glTranslatef(-29.33, 0 , -24.33);
+    glColor3f(0,0,0);
+    glBegin(GL_LINE_LOOP);
+        glVertex3f(2,0.2,2);
+        glVertex3f(2,0.2,-2);
+        glVertex3f(-2,0.2,-2);
+        glVertex3f(-2,0.2,2);
+    
+    glEnd();
+    glPopMatrix();*/
+    
     
     altar(-31.33, -31.33);
     altar(0, -31.33);
     altar(31.33, -31.33);
     
+    glColor3f(1,1,1);
     magic_circle(-29.33, -24.33);
     magic_circle(2, -24.33);
     magic_circle(33.33, -24.33);
-    
-     
     
     double clip_plane[] = {vektorZ[0], 0, vektorZ[1], -(vektorZ[0]*_x+vektorZ[1]*_z+10)};
 
     glClipPlane(GL_CLIP_PLANE0, clip_plane);
     
+    
+    
     if(brojac>=50 && niz.aktivno){
-
-        
         glPushMatrix();
             glEnable(GL_CLIP_PLANE0);
             glTranslatef(niz.x+1 + 10*cos(_fi), 3, niz.z + 10*sin(_fi));
-            glScalef(0.25, 0.25, 0.25);
-            glColor3f(0,0,0);
-            lopta();
-        
+            
+            switch(element){
+                case VATRA:
+                    glColor3f(1,0,0);
+                    glutSolidSphere(1, 30, 30);
+                    break;
+                    
+                case LED:
+                    glRotatef(-(ugao2/PI*180-90), 0, 1, 0);
+                    led();
+                    break;
+                    
+                default:
+                    break;
+            }
+            
             glDisable(GL_CLIP_PLANE0);
         glPopMatrix();
-        
-        magic_circle2(1+_x + 10*cos(_fi), _z + 10*sin(_fi));
+        if(brojac < 70)
+            magic_circle2(1+_x + 10*cos(_fi), _z + 10*sin(_fi));
         
     } else if(niz.aktivno){
         
@@ -246,7 +315,9 @@ static void on_display(void)
         niz.z = _z;
         niz.vec_x = vektorZ[0];
         niz.vec_z = vektorZ[1];
+        ugao2 = _fi;
     }
+    
     
     
     

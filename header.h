@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <math.h>
 #define PI 3.1415926535
-#define NUMBER_OF_DOTS 500
+#define NUMBER_OF_DOTS 750
 #define TIMER_ID 0
 #define TIMER_MAGIJA_ID 1
 #define TIMER_INTERVAL 30
@@ -14,6 +14,9 @@
 #define DESNO 2
 #define NAPRED 3
 #define NAZAD 4
+#define VATRA 1
+#define LED 2
+#define MUNJA 3
 
 //funkcije--------------------------------
 
@@ -31,6 +34,8 @@ void magic_circle(float x, float z);
 void magic_circle2(float x, float z);
 void on_timer_magija(int value);
 void lopta();
+void kupa();
+void led();
 
 
 //promenljive-----------------------------

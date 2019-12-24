@@ -5,14 +5,14 @@ void scena(){
     
     glPushMatrix();
     
-    GLfloat material_ambient[] = { 0.3, 0.1, 0.1, 1 };
+    /*GLfloat material_ambient[] = { 0.3, 0.1, 0.1, 1 };
     GLfloat material_diffuse[] = { 1, 0.2, 0.2, 1 };
     GLfloat material_specular[] = { 0, 0, 0, 1 };
     GLfloat shininess = 10;
     glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material_ambient);
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, material_diffuse);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular);
-    glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);
+    glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);*/
     
     // plafon
     glColor3f(1, 0, 0);
@@ -25,7 +25,7 @@ void scena(){
     
     
     // pod
-    glColor3f(1, 0, 0);
+    glColor3f(1, 0.2, 0.2);
     glBegin(GL_POLYGON);
         glVertex3f(-50, 0, -50);
         glVertex3f(-50, 0, 100);

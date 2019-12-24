@@ -57,8 +57,9 @@ void on_timer(int value){
         if(brojac < 50){
             brojac++; 
         } else {
-            niz.x += niz.vec_x;
-            niz.z += niz.vec_z;
+            niz.x += niz.vec_x*1.5;
+            niz.z += niz.vec_z*1.5;
+            brojac++;
         }
     }
     
