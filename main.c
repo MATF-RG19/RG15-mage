@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "header.h"
+#include "image.h"
 
 
 static int window_width, window_height;
@@ -26,7 +27,7 @@ static int element = 0;
 
 Magija niz;
 
-
+GLuint names[3];
 
 
 
@@ -44,14 +45,14 @@ int main(int argc, char **argv){
     glutReshapeFunc(on_reshape);
     glutDisplayFunc(on_display);
     
-    glClearColor(0, 0, 0, 0);
-    glEnable(GL_DEPTH_TEST);
+    //glClearColor(0, 0, 0, 0);
+    //glEnable(GL_DEPTH_TEST);
     
     
-    if (!animacija_kretanja) {
-            glutTimerFunc(TIMER_INTERVAL, on_timer, TIMER_ID);
-            animacija_kretanja = 1;
-    }
+    
+    glutTimerFunc(TIMER_INTERVAL, on_timer, TIMER_ID);
+    animacija_kretanja = 1;
+
     
     niz.aktivno = 0;
     /*glEnable(GL_BLEND);
@@ -63,7 +64,7 @@ int main(int argc, char **argv){
     //glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 1);
     
     
-
+    initialize();
 
     glutMainLoop();
 
@@ -305,19 +306,25 @@ static void on_display(void){
             
             glDisable(GL_CLIP_PLANE0);
         glPopMatrix();
+        glPointSize(3);
+        glLineWidth(5);
         if(brojac < 70)
             magic_circle2(1+_x + 10*cos(_fi), _z + 10*sin(_fi));
         
+        glPointSize(1);
+        glLineWidth(1);
     } else if(niz.aktivno){
-        
+        glPointSize(3);
+        glLineWidth(5);
         magic_circle2(1+_x + 10*cos(_fi), _z + 10*sin(_fi));
+        glPointSize(1);
+        glLineWidth(1);
         niz.x = _x;
         niz.z = _z;
         niz.vec_x = vektorZ[0];
         niz.vec_z = vektorZ[1];
         ugao2 = _fi;
     }
-    
     
     
     
@@ -349,24 +356,4 @@ static void on_display(void){
 }
 
 
-void init_lights(){
-    
-    GLfloat light_position[] = { 0, 15, 50, 1 };
 
-    
-    GLfloat light_ambient[] = { 0.1, 0.1, 0.1, 1 };
-
-    
-    GLfloat light_diffuse[] = { 0.7, 0.7, 0.7, 1 };
-
-    
-    GLfloat light_specular[] = { 0.9, 0.9, 0.9, 1 };
-
-    
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
-}

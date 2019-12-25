@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "header.h"
 
-void modelLika(){
+void modelLika(void){
     
     //desna ruka
     glPushMatrix();
@@ -162,7 +162,7 @@ void altar(float x, float z){
     
 }
 
-void munja(){
+void munja(void){
     
     
     
@@ -311,7 +311,7 @@ void vatraDeo(float x){
     }
 }
 
-void vatra(){
+void vatra(void){
     
     
     glPushMatrix();
@@ -381,7 +381,7 @@ void vatra(){
     glPopMatrix();
 }
 
-void pahuljaDeo(){
+void pahuljaDeo(void){
     
     
     
@@ -431,7 +431,7 @@ void pahuljaDeo(){
     
 }
 
-void pahulja(){
+void pahulja(void){
     
     glPushMatrix();
     
@@ -545,7 +545,7 @@ void magic_circle2(float x, float z){
     glPopMatrix();
 }
 
-void led(){
+void led(void){
     
     glColor3f(0.4, 0.4, 1);
     

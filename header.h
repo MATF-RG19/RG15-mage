@@ -17,25 +17,27 @@
 #define VATRA 1
 #define LED 2
 #define MUNJA 3
+#define FILENAME0 "floor.bmp"
+#define FILENAME1 "wall.bmp"
+#define FILENAME2 "ceiling.bmp"
 
 //funkcije--------------------------------
 
-void modelLika();
-void scena();
+void modelLika(void);
+void scena(void);
 void altar(float x, float z);
-void munja();
-void vatra();
+void munja(void);
+void vatra(void);
 void vatraDeo(float x);
-void pahuljaDeo();
-void pahulja();
-void init_lights();
+void pahuljaDeo(void);
+void pahulja(void);
+void init_lights(void);
 void on_timer(int value);
 void magic_circle(float x, float z);
 void magic_circle2(float x, float z);
 void on_timer_magija(int value);
-void lopta();
-void kupa();
-void led();
+void led(void);
+void initialize(void);
 
 
 //promenljive-----------------------------
@@ -53,6 +55,7 @@ extern int smer_rotiranja;
 extern float parametar_animacije;
 extern int brojac;
 
+extern GLuint names[3];
 
 typedef struct Magija {
     int aktivno;

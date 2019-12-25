@@ -2,11 +2,11 @@ PROGRAM = mage
 CC      = gcc
 CFLAGS  = -g -Wall -I/usr/X11R6/include -I/usr/pkg/include
 LDFLAGS = -L/usr/X11R6/lib -L/usr/pkg/lib
-FILES = scena.o modeli.o timers.o
+FILES = scena.o modeli.o timers.o image.o
 LDLIBS  = -lglut -lGLU -lGL -lm
 
 
-$(PROGRAM): scena.o modeli.o timers.o main.o
+$(PROGRAM): scena.o modeli.o timers.o image.o main.o
 	$(CC) $(LDFLAGS)  -o $(PROGRAM) main.o $(FILES) $(LDLIBS)
 	
 modeli.o: modeli.c
@@ -17,7 +17,9 @@ scena.o: scena.c
 	
 timers.o: timers.c
 	$(CC) $(LDFLAGS) -c timers.c $(LDLIBS)
-
+	
+image.o: image.c
+	$(CC) $(LDFLAGS) -c image.c $(LDLIBS)
 
 .PHONY: clean dist
 
