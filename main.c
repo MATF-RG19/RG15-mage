@@ -45,10 +45,15 @@ int main(int argc, char **argv){
     glutReshapeFunc(on_reshape);
     glutDisplayFunc(on_display);
     
-    //glClearColor(0, 0, 0, 0);
-    //glEnable(GL_DEPTH_TEST);
     
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_NORMALIZE);
+    glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 1);
     
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    
+    init_lights();
     
     glutTimerFunc(TIMER_INTERVAL, on_timer, TIMER_ID);
     animacija_kretanja = 1;
@@ -59,13 +64,15 @@ int main(int argc, char **argv){
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);*/
     
     
-    //glEnable(GL_NORMALIZE);
+    
     glEnable(GL_COLOR_MATERIAL);
-    //glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 1);
+    
     
     
     initialize();
-
+    
+    
+    glClearColor(0, 0, 0, 0);
     glutMainLoop();
 
     return 0;
@@ -197,7 +204,7 @@ static void on_display(void){
         );
     
 
-    //init_lights();
+    
 
     
     scena();

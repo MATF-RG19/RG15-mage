@@ -97,9 +97,9 @@ void modelLika(void){
     glTranslatef(0, 0.5, 0.5);
     glutSolidCube(1);
     
-    
-    
     glPopMatrix();
+    
+    
     glPopMatrix();
     
     
@@ -109,14 +109,14 @@ void altar(float x, float z){
     
     glPushMatrix();
     
-    GLfloat material_ambient[] = { 0.5, 0.5, 0.5, 1 };
+    /*GLfloat material_ambient[] = { 0.5, 0.5, 0.5, 1 };
     GLfloat material_diffuse[] = { 0.8, 0.8, 0.8, 1 };
     GLfloat material_specular[] = { 0, 0, 0, 1 };
     GLfloat shininess = 20;
     glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material_ambient);
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, material_diffuse);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular);
-    glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);
+    glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);*/
     
     glTranslatef(2+x, 0, 2+z);
     
@@ -169,14 +169,14 @@ void munja(void){
     glPushMatrix();
     
     
-    GLfloat material_ambient[] = { 0.3, 0.3, 0.3, 1 };
+    /*GLfloat material_ambient[] = { 0.3, 0.3, 0.3, 1 };
     GLfloat material_diffuse[] = { 1, 1, 0.4, 1 };
     GLfloat material_specular[] = { 0, 0, 0, 1 };
     GLfloat shininess = 20;
     glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material_ambient);
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, material_diffuse);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular);
-    glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);
+    glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);*/
     
     
     glScalef(0.5,0.5,1);
@@ -317,14 +317,14 @@ void vatra(void){
     glPushMatrix();
     
     
-    GLfloat material_ambient[] = { 0.3, 0.3, 0.3, 1 };
+    /*GLfloat material_ambient[] = { 0.3, 0.3, 0.3, 1 };
     GLfloat material_diffuse[] = { 1, 0.4, 0.4, 1 };
     GLfloat material_specular[] = { 0, 0, 0, 1 };
     GLfloat shininess = 20;
     glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material_ambient);
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, material_diffuse);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular);
-    glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);
+    glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);*/
     
     
     
@@ -385,7 +385,7 @@ void pahuljaDeo(void){
     
     
     
-    glColor3f(0.4,0.4,1);
+    /*glColor3f(0.4,0.4,1);
     glBegin(GL_POLYGON);
     
         glVertex3f(-0.2,0,0);
@@ -426,6 +426,29 @@ void pahuljaDeo(void){
     
     glEnd();
     
+    glPopMatrix();*/
+    glColor3f(0.4,0.4,1);
+    glPushMatrix();
+    
+    glScalef(0.4, 2, 0.5);
+    glTranslatef(0,0.5,0);
+    glutSolidCube(1);
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslatef(0,1,0);
+    glRotatef(50, 0, 0, 1);
+    glScalef(0.3, 1, 0.5);
+    glTranslatef(0,0.5,0);
+    glutSolidCube(1);
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslatef(0,1,0);
+    glRotatef(-50, 0, 0, 1);
+    glScalef(0.3, 1, 0.5);
+    glTranslatef(0,0.5,0);
+    glutSolidCube(1);
     glPopMatrix();
     
     
@@ -433,7 +456,7 @@ void pahuljaDeo(void){
 
 void pahulja(void){
     
-    glPushMatrix();
+    /*glPushMatrix();
     
     GLfloat material_ambient[] = { 0.3, 0.3, 0.3, 1 };
     GLfloat material_diffuse[] = { 0.4, 0.4, 1, 1 };
@@ -462,13 +485,23 @@ void pahulja(void){
     }
      
      
-    glPopMatrix();
+    glPopMatrix();*/
+    
+    //glPushMatrix();
+    int i;
+        for (i=0; i<6; i++){
+            glPushMatrix();
+            glRotatef(60*i, 0, 0,1);
+            pahuljaDeo();
+            glPopMatrix();
+        }
+    //glPopMatrix();
     
 }
 
 void magic_circle(float x, float z){
     
-    
+    glDisable(GL_LIGHTING);
     glPushMatrix();
     
     glTranslatef(x, 0, z);
@@ -501,12 +534,14 @@ void magic_circle(float x, float z){
         glVertex3f(1, 0.05, 1);
     glEnd();
     glPopMatrix();
+    
+    glEnable(GL_LIGHTING);
 }
 
 
 void magic_circle2(float x, float z){
     
-    
+    glDisable(GL_LIGHTING);
     glPushMatrix();
     
     glTranslatef(x, 3, z);
@@ -543,6 +578,7 @@ void magic_circle2(float x, float z){
         glVertex3f(1, 0.05, 1);
     glEnd();
     glPopMatrix();
+    glEnable(GL_LIGHTING);
 }
 
 void led(void){

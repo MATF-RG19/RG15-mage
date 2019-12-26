@@ -175,24 +175,29 @@ void scena(){
 
 void init_lights(){
     
-    GLfloat light_position[] = { 0, 15, 50, 1 };
+    GLfloat light_position[] = { 0, 3, 3, 1 };
 
     
-    GLfloat light_ambient[] = { 0.1, 0.1, 0.1, 1 };
+    float light_ambient[] = {.3f, .3f, .3f, 1};
+    float light_diffuse[] = {.7f, .7f, .7f, 1};
+    float light_specular[] = {.7f, .7f, .7f, 1};
 
     
-    GLfloat light_diffuse[] = { 0.7, 0.7, 0.7, 1 };
 
-    
-    GLfloat light_specular[] = { 0.9, 0.9, 0.9, 1 };
-
-    
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
     glLightfv(GL_LIGHT0, GL_POSITION, light_position);
     glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
     glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+    
+    /*GLfloat ambient[] = {0.3,0.3,0.3,0};
+    GLfloat diffuse[] = {0,0.7,0,0};
+    GLfloat specular[] = {0.6,0.6,0.6,0};
+    GLfloat shininess = 80;
+
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);
+    glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);*/
 }
 
 
@@ -201,10 +206,10 @@ void initialize(void){ // preuzeto sa casa
     Image * image;
 
     
-    glClearColor(0, 0, 0, 0);
+    //glClearColor(0, 0, 0, 0);
 
     
-    glEnable(GL_DEPTH_TEST);
+    //glEnable(GL_DEPTH_TEST);
 
     
     glEnable(GL_TEXTURE_2D);
