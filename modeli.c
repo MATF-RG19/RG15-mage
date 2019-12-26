@@ -282,6 +282,8 @@ void munja(void){
 
 void vatraDeo(float x){
     int i;
+    glBegin(GL_POLYGON);
+    glColor3f(1,x,0);
     for(i=0; i < NUMBER_OF_DOTS; i++){
         /*glColor3f(x,x,0);
         glBegin(GL_POINTS);
@@ -296,19 +298,24 @@ void vatraDeo(float x){
                    0);
         glEnd();*/
         
-        glColor3f(1,x,0);
-        glBegin(GL_POLYGON);
+        
+        
         glVertex3f(cos(PI + i*PI/NUMBER_OF_DOTS),
                    sin(PI + i*PI/NUMBER_OF_DOTS),
                    0);
+        }
+        for(i=0; i < NUMBER_OF_DOTS; i++){
         glVertex3f(-1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS),
                    2.5*sin(i*PI/NUMBER_OF_DOTS/3.4),
                    0);
+        }
+        for(i=0; i < NUMBER_OF_DOTS; i++){
         glVertex3f(1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS+PI-PI/3.4),
                    2.5*sin(i*PI/NUMBER_OF_DOTS/3.4+PI-PI/3.4),
                    0);
-        glEnd();
+        
     }
+    glEnd();
 }
 
 void vatra(void){
@@ -335,10 +342,10 @@ void vatra(void){
     for(j=0; j<0.5 ;j+=0.01){ //popunjava prostor izmedju
         glPushMatrix();
         glTranslatef(0,0,j);
-        
-        for(i=0; i<NUMBER_OF_DOTS; i++){
+        glBegin(GL_POINTS);
+        /*for(i=0; i<NUMBER_OF_DOTS; i++){
             glColor3f(1,0,0);
-            glBegin(GL_POINTS);
+        
             
             glVertex3f(cos(PI + i*PI/NUMBER_OF_DOTS),
                    sin(PI + i*PI/NUMBER_OF_DOTS),
@@ -350,8 +357,9 @@ void vatra(void){
                    2.5*sin(i*PI/NUMBER_OF_DOTS/3.4+PI-PI/3.4),
                    0);
             
-            glEnd(); 
-        }
+            
+        }*/
+        glEnd(); 
         glPopMatrix();
     } 
     

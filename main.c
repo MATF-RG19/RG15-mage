@@ -190,13 +190,15 @@ static void on_display(void){
 
     glViewport(0, 0, window_width, window_height);
 
-    glMatrixMode(GL_MODELVIEW);
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(
             60,
             window_width/(float)window_height,
             0.1, 200);
 
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
     gluLookAt(
             1+_x, 6.5, _z,
             1+_x + cos(_fi), 6.5, _z + sin(_fi),
