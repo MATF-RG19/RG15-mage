@@ -339,11 +339,11 @@ void vatra(void){
     
     int i;
     float j;
-    for(j=0; j<0.5 ;j+=0.01){ //popunjava prostor izmedju
+    /*for(j=0; j<0.5 ;j+=0.01){ //popunjava prostor izmedju
         glPushMatrix();
         glTranslatef(0,0,j);
         glBegin(GL_POINTS);
-        /*for(i=0; i<NUMBER_OF_DOTS; i++){
+        for(i=0; i<NUMBER_OF_DOTS; i++){
             glColor3f(1,0,0);
         
             
@@ -358,10 +358,10 @@ void vatra(void){
                    0);
             
             
-        }*/
+        }
         glEnd(); 
         glPopMatrix();
-    } 
+    } */
     
     vatraDeo(0);
     
@@ -385,6 +385,47 @@ void vatra(void){
     glPopMatrix();
     
     glPopMatrix();
+
+    glColor3f(1,0,0);
+    glBegin(GL_TRIANGLE_STRIP);
+        for(i = 0; i < NUMBER_OF_DOTS; i++){
+            glVertex3f(cos(PI + i*PI/NUMBER_OF_DOTS),
+                   sin(PI + i*PI/NUMBER_OF_DOTS),
+                   0);
+            glPushMatrix();
+            //glTranslatef(0,0.5,0);
+            glVertex3f(cos(PI + i*PI/NUMBER_OF_DOTS),
+                   sin(PI + i*PI/NUMBER_OF_DOTS),
+                   0.5);
+            glPopMatrix();
+        }
+        for(i = 0; i < NUMBER_OF_DOTS; i++){
+            glVertex3f(-1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS),
+                   2.5*sin(i*PI/NUMBER_OF_DOTS/3.4),
+                   0);
+            //glTranslatef(0,0.5,0);
+            glVertex3f(-1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS),
+                   2.5*sin(i*PI/NUMBER_OF_DOTS/3.4),
+                   0.5);
+            glPopMatrix();
+        }
+        for(i = 0; i < NUMBER_OF_DOTS; i++){
+            glVertex3f(1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS+PI-PI/3.4),
+                   2.5*sin(i*PI/NUMBER_OF_DOTS/3.4+PI-PI/3.4),
+                   0);
+            //glTranslatef(0,0.5,0);
+            glVertex3f(1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS+PI-PI/3.4),
+                   2.5*sin(i*PI/NUMBER_OF_DOTS/3.4+PI-PI/3.4),
+                   0.5);
+            glPopMatrix();
+        }
+    glEnd();
+
+
+
+
+
+
     
     glPopMatrix();
 }
