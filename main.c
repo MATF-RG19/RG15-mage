@@ -14,10 +14,10 @@ float _x = 0;
 float _z = 0;
 int animacija_kretanja = 0;
 int animacija_magija = 0;
-float _fi = PI/2;
+float _fi = PI/2;//*
 float ugao = 0;
-float vektorX[2] = {1, 0};
-float vektorZ[2] = {0, 1};
+float vektorX[2] = {1, 0};//*
+float vektorZ[2] = {0, 1};//*
 int smer_kretanja = 0;
 int smer_rotiranja = 0;
 float parametar_animacije = 0;
@@ -128,9 +128,9 @@ static void on_keyboard(unsigned char key, int x, int y){
         
     case 'r':
     case 'R':
-        if(_x > -31.33 && _x < -27.33 && _z > -26.33 && _z < -22.33){
+        if(_x > -33.33 && _x < -28.33 && _z > -26.33 && _z < -22.33){
             element = VATRA;
-        } else if(_x > 0 && _x < 4 && _z > -26.33 && _z < -22.33){
+        } else if(_x > -1 && _x < 3 && _z > -26.33 && _z < -22.33){
             element = LED;
         }
     }
@@ -143,32 +143,38 @@ static void on_keyboard_up(unsigned char key, int x, int y){
         break;
     case 'w':
     case 'W':    
-        smer_kretanja = 0;
+        if (smer_kretanja == NAPRED)
+            smer_kretanja = 0;
         break;
         
     case 'a':
     case 'A':    
-        smer_kretanja = 0;
+        if (smer_kretanja == LEVO)
+            smer_kretanja = 0;
         break;
         
     case 's':
     case 'S':    
-        smer_kretanja = 0;
+        if (smer_kretanja == NAZAD)
+            smer_kretanja = 0;
         break;
         
     case 'd':
     case 'D':    
-        smer_kretanja = 0;
+        if (smer_kretanja == DESNO)
+            smer_kretanja = 0;
         break;
         
     case 'q':
     case 'Q':    
-        smer_rotiranja = 0;
+        if (smer_rotiranja == LEVO)
+            smer_rotiranja = 0;
         break;
         
     case 'e':
     case 'E':    
-        smer_rotiranja = 0;
+        if (smer_rotiranja == DESNO)
+            smer_rotiranja = 0;
         break;
         
     default:
@@ -190,13 +196,16 @@ static void on_display(void){
 
     glViewport(0, 0, window_width, window_height);
 
-    glMatrixMode(GL_MODELVIEW);
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(
             60,
             window_width/(float)window_height,
             0.1, 200);
 
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    kolizija();
     gluLookAt(
             1+_x, 6.5, _z,
             1+_x + cos(_fi), 6.5, _z + sin(_fi),
@@ -208,6 +217,7 @@ static void on_display(void){
 
     
     scena();
+    
     
 
     glPushMatrix();

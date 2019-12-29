@@ -9,6 +9,8 @@ void on_timer(int value){
     
     parametar_animacije++;
 
+    
+    
     switch(smer_kretanja){
         case LEVO:
             _x += vektorX[0];
@@ -34,16 +36,16 @@ void on_timer(int value){
     
     switch(smer_rotiranja){
         case DESNO:
-            _fi += 0.05;
-            ugao -= 0.05;
+            _fi += 0.1;//0.5
+            ugao -= 0.1;
             vektorX[0] = cos(ugao);
             vektorX[1] = -sin(ugao);
             vektorZ[0] = sin(ugao);
             vektorZ[1] = cos(ugao);
             break;
         case LEVO:
-            _fi -= 0.05;
-            ugao += 0.05;
+            _fi -= 0.1;
+            ugao += 0.1;
             vektorX[0] = cos(ugao);
             vektorX[1] = -sin(ugao);
             vektorZ[0] = sin(ugao);

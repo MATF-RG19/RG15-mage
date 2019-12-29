@@ -38,6 +38,7 @@ void magic_circle2(float x, float z);
 void on_timer_magija(int value);
 void led(void);
 void initialize(void);
+void kolizija(void);
 
 
 //promenljive-----------------------------
