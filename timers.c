@@ -36,16 +36,16 @@ void on_timer(int value){
     
     switch(smer_rotiranja){
         case DESNO:
-            _fi += 0.1;//0.5
-            ugao -= 0.1;
+            _fi += 0.05;//0.5
+            ugao -= 0.05;
             vektorX[0] = cos(ugao);
             vektorX[1] = -sin(ugao);
             vektorZ[0] = sin(ugao);
             vektorZ[1] = cos(ugao);
             break;
         case LEVO:
-            _fi -= 0.1;
-            ugao += 0.1;
+            _fi -= 0.05;
+            ugao += 0.05;
             vektorX[0] = cos(ugao);
             vektorX[1] = -sin(ugao);
             vektorZ[0] = sin(ugao);
@@ -59,8 +59,8 @@ void on_timer(int value){
         if(brojac < 50){
             brojac++; 
         } else {
-            niz.x += niz.vec_x;
-            niz.z += niz.vec_z;
+            niz.x += niz.vec_x*1.5;
+            niz.z += niz.vec_z*1.5;
             brojac++;
         }
     }

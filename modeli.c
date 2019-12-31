@@ -150,7 +150,7 @@ void altar(float x, float z){
     
 }
 
-void munja(void){
+void munja_model(void){
     
     
     
@@ -317,7 +317,7 @@ void vatra(void){
     
     int i;
 
-    //popunjava prostor izmedju
+    //omotac
     glColor3f(1,0,0);
     glBegin(GL_TRIANGLE_STRIP);
     for(i=0; i<NUMBER_OF_DOTS; i++){
@@ -516,6 +516,44 @@ void led(void){
     glutSolidCone(0.5,2,30,30);
     glPopMatrix();
     glPopMatrix();
+}
+
+void munjaDeo(void){
+    
+    glDisable(GL_LIGHTING);
+    glLineWidth(5);
+    glColor3f(1,1,0);
+    glPushMatrix();
+    
+    //glTranslatef(0, 3, 0);
+    glRotatef(40, 0, 0, 1);
+    glBegin(GL_LINE_STRIP);
+        glVertex3f(0, 0, 0);
+        glVertex3f(0, -1, 1);
+        glVertex3f(0, 2, 3);
+        glVertex3f(0, -2, 6);
+        glVertex3f(0, 2, 10);
+        glVertex3f(0, 0, 12);
+        glVertex3f(0, 1, 13);
+        glVertex3f(0, -1, 15);
+        glVertex3f(0, 0, 16);
+    glEnd();
+    
+    glPopMatrix();
+    
+    glLineWidth(1);
+    glEnable(GL_LIGHTING);
+}
+
+void munja(void){
+    int i;
+    glPushMatrix();
+    for(i=0; i<9; i++){
+        glTranslatef(0, 0, 16);
+        munjaDeo();
+    }
+    glPopMatrix();
+    munjaDeo();
 }
 
 

@@ -23,8 +23,10 @@ int smer_rotiranja = 0;
 float parametar_animacije = 0;
 int brojac = 0;
 static float ugao2 = PI/2;
-int element = 1;
+int element = 0;
 int parametar_magije = 1;
+static float tmpx;
+static float tmpz;
 
 Magija niz;
 
@@ -106,14 +108,14 @@ static void on_keyboard(unsigned char key, int x, int y){
         smer_kretanja = NAZAD;
         
         break;
-    case 'e':
-    case 'E':
+    case 'k':
+    case 'K':
         smer_rotiranja = DESNO;
         
         
         break;
-    case 'q':
-    case 'Q':    
+    case 'j':
+    case 'J':    
         smer_rotiranja = LEVO;
         
         break;
@@ -132,10 +134,14 @@ static void on_keyboard(unsigned char key, int x, int y){
         
     case 'r':
     case 'R':
-        if(_x > -33.33 && _x < -28.33 && _z > -26.33 && _z < -22.33){
-            element = VATRA;
-        } else if(_x > -1 && _x < 3 && _z > -26.33 && _z < -22.33){
-            element = LED;
+        if(!niz.aktivno){
+            if(_x > -33.33 && _x < -28.33 && _z > -26.33 && _z < -22.33){
+                element = VATRA;
+            } else if(_x > -1 && _x < 3 && _z > -26.33 && _z < -22.33){
+                element = LED;
+            } else if(_x > 31.33 && _x < 35.33 && _z > -26.33 && _z < -22.33){
+                element = MUNJA;
+            }
         }
     }
 }
@@ -169,14 +175,14 @@ static void on_keyboard_up(unsigned char key, int x, int y){
             smer_kretanja = 0;
         break;
         
-    case 'q':
-    case 'Q':    
+    case 'j':
+    case 'J':    
         if (smer_rotiranja == LEVO)
             smer_rotiranja = 0;
         break;
         
-    case 'e':
-    case 'E':    
+    case 'k':
+    case 'K':    
         if (smer_rotiranja == DESNO)
             smer_rotiranja = 0;
         break;
@@ -216,12 +222,8 @@ static void on_display(void){
             0, 1, 0
         );
     
-
-    
-
     
     scena();
-    
     
 
     glPushMatrix();
@@ -245,7 +247,7 @@ static void on_display(void){
         glRotatef(-5, 0, 0, 1);
         
         glTranslatef(-1.65, 5.6, 3);
-        glRotatef((parametar_animacije)/5, 0, 1, 0);
+        glRotatef(parametar_animacije/5, 0, 1, 0);
         glScalef(0.25, 1, 0.25);
         glTranslatef(0, -0.05, 0);
         magic_circle(0, 0);
@@ -258,7 +260,7 @@ static void on_display(void){
     glPushMatrix();
     glTranslatef(33.33, 6.5 + sin(parametar_animacije/50.0), -29.08);
     glRotatef(180, 0, 1,0);
-    munja();
+    munja_model();
     glPopMatrix();
     
     glPushMatrix();
@@ -299,39 +301,72 @@ static void on_display(void){
     magic_circle(33.33, -24.33);
     
     double clip_plane[] = {vektorZ[0], 0, vektorZ[1], -(vektorZ[0]*_x + vektorZ[1]*_z + 10)};
-
     glClipPlane(GL_CLIP_PLANE0, clip_plane);
     
+    double clip_plane2[] = {-vektorZ[0], 0, -vektorZ[1], (vektorZ[0]*_x + vektorZ[1]*_z + sqrt(tmpx*tmpx + tmpz*tmpz))};
+    glClipPlane(GL_CLIP_PLANE1, clip_plane2);
     
     
     if(brojac>=50 && niz.aktivno){
-        glPushMatrix();
-            glEnable(GL_CLIP_PLANE0);
-            if(kolizija2()){
+        
+        if(element == MUNJA){
+            if(brojac >= 70){
+                niz.aktivno = 0;
+            }
+            if(brojac == 50){
+                tmpx = fabs(10*cos(_fi));
+                tmpz = fabs(10*sin(_fi));
+            }
+            while(!kolizija2()){
+                tmpx += fabs(niz.vec_x);
+                tmpz += fabs(niz.vec_z);
+                niz.x += niz.vec_x;
+                niz.z += niz.vec_z;
+            }
+            
+            printf("%f %f\n", niz.x, niz.z);
+            
+            
+            
+            glEnable(GL_CLIP_PLANE1);
+            glPushMatrix();
+            
+            glTranslatef(1+_x + 10*cos(_fi), 3, _z + 10*sin(_fi));
+            glRotatef(ugao/PI*180, 0, 1, 0);
+            munja();
+            glPopMatrix();
+            
+            glDisable(GL_CLIP_PLANE1);
+        } else {
+            glPushMatrix();
+                glEnable(GL_CLIP_PLANE0);
+                if(kolizija2()){
+                    glDisable(GL_CLIP_PLANE0);
+                }
+                glTranslatef(niz.x+1, 3, niz.z);
+                
+                switch(element){
+                    case VATRA:
+                        glPushMatrix();
+                        glColor3f(1,0,0);
+                        glScalef(parametar_magije, parametar_magije, parametar_magije);
+                        glutSolidSphere(1, 30, 30);
+                        glPopMatrix();
+                        break;
+                        
+                    case LED:
+                        glRotatef(-(ugao2/PI*180-90), 0, 1, 0);
+                        led();
+                        break;
+                        
+                    default:
+                        break;
+                }
+                
                 glDisable(GL_CLIP_PLANE0);
-            }
-            glTranslatef(niz.x+1, 3, niz.z);
-            
-            switch(element){
-                case VATRA:
-                    glPushMatrix();
-                    glColor3f(1,0,0);
-                    glScalef(parametar_magije, parametar_magije, parametar_magije);
-                    glutSolidSphere(1, 30, 30);
-                    glPopMatrix();
-                    break;
-                    
-                case LED:
-                    glRotatef(-(ugao2/PI*180-90), 0, 1, 0);
-                    led();
-                    break;
-                    
-                default:
-                    break;
-            }
-            
-            glDisable(GL_CLIP_PLANE0);
-        glPopMatrix();
+            glPopMatrix();
+        }
+        
         glPointSize(3);
         glLineWidth(5);
         if(brojac < 70)

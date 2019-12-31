@@ -26,7 +26,7 @@
 void modelLika(void);
 void scena(void);
 void altar(float x, float z);
-void munja(void);
+void munja_model(void);
 void vatra(void);
 void vatraDeo(float x);
 void pahuljaDeo(void);
@@ -37,6 +37,8 @@ void magic_circle(float x, float z);
 void magic_circle2(float x, float z);
 void on_timer_magija(int value);
 void led(void);
+void munjaDeo(void);
+void munja(void);
 void initialize(void);
 void kolizija1(void);
 int kolizija2(void);
