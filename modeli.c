@@ -101,25 +101,13 @@ void modelLika(void){
     
     
     glPopMatrix();
-    
-    
 }
 
 void altar(float x, float z){
     
     glPushMatrix();
     
-    /*GLfloat material_ambient[] = { 0.5, 0.5, 0.5, 1 };
-    GLfloat material_diffuse[] = { 0.8, 0.8, 0.8, 1 };
-    GLfloat material_specular[] = { 0, 0, 0, 1 };
-    GLfloat shininess = 20;
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material_ambient);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, material_diffuse);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular);
-    glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);*/
-    
     glTranslatef(2+x, 0, 2+z);
-    
     
     //postolje
     glPushMatrix();
@@ -167,82 +155,98 @@ void munja(void){
     
     
     glPushMatrix();
-    
-    
-    /*GLfloat material_ambient[] = { 0.3, 0.3, 0.3, 1 };
-    GLfloat material_diffuse[] = { 1, 1, 0.4, 1 };
-    GLfloat material_specular[] = { 0, 0, 0, 1 };
-    GLfloat shininess = 20;
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material_ambient);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, material_diffuse);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular);
-    glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);*/
-    
-    
+
     glScalef(0.5,0.5,1);
     glColor3f(1,1,0);
     glBegin(GL_POLYGON);
+        glNormal3f(0,-1,0);
+        
         glVertex3f(0,3,0);
-        glVertex3f(-1,3,0);
-        glVertex3f(-1,3,0.5);
+        
         glVertex3f(0,3,0.5);
+        
+        glVertex3f(-1,3,0.5);
+        
+        glVertex3f(-1,3,0);
     glEnd();
     
     
     
-    glColor3f(1,1,0);
     glBegin(GL_POLYGON);
+        glNormal3f(-1,1,0);
+        
         glVertex3f(-1,3,0);
-        glVertex3f(0,0,0);
-        glVertex3f(0,0,0.5);
+        
         glVertex3f(-1,3,0.5);
+        
+        glVertex3f(0,0,0.5);
+        
+        glVertex3f(0,0,0);
+        
     glEnd();
     
    
     
-    glColor3f(1,1,0);
     glBegin(GL_POLYGON);
+        glNormal3f(1,0,0);
+        
         glVertex3f(0,0,0);
+        
         glVertex3f(0,2,0);
+        
         glVertex3f(0,2,0.5);
+        
         glVertex3f(0,0,0.5);
     glEnd();
     
     
     
-    glColor3f(1,1,0);
     glBegin(GL_POLYGON);
+        glNormal3f(0,-1,0);
+        
         glVertex3f(1,2,0);
+        
         glVertex3f(0,2,0);
+        
         glVertex3f(0,2,0.5);
+        
         glVertex3f(1,2,0.5);
     glEnd();
     
     
     
-    glColor3f(1,1,0);
+    
     glBegin(GL_POLYGON);
+    
+        glNormal3f(-1,-1,0);
+
         glVertex3f(0,5,0);
-        glVertex3f(0,2,0);
+        
+        glVertex3f(1,2,0);
+        
         glVertex3f(1,2,0.5);
+        
         glVertex3f(0,5,0.5);
     glEnd();
     
-   
     
-    glColor3f(1,1,0);
     glBegin(GL_POLYGON);
+        glNormal3f(1,0,0);
+        
         glVertex3f(0,5,0);
+        
         glVertex3f(0,3,0);
+        
         glVertex3f(0,3,0.5);
+        
         glVertex3f(0,5,0.5);
     glEnd();
+
     
    
     
-    glColor3f(1,1,0);
     glBegin(GL_POLYGON);
-    glNormal3f(0,0,1);
+        glNormal3f(0,0,1);
         glVertex3f(0,3,0);
         glVertex3f(-1,3,0);
         glVertex3f(0,0,0);
@@ -257,21 +261,20 @@ void munja(void){
     
     glPushMatrix();
     glTranslatef(0, 0, 0.5);
-    glColor3f(1,1,0);
     glBegin(GL_POLYGON);
         
-        /*glVertex3f(0,3,0);
-        glVertex3f(-1,3,0);
-        glVertex3f(0,0,0);
-        glVertex3f(0,2,0);
-        glVertex3f(1,2,0);
-        glVertex3f(0,5,0);*/
+        glNormal3f(0,0,1);
         
         glVertex3f(0,3,0);
+        
         glVertex3f(0,5,0);
+        
         glVertex3f(1,2,0);
+        
         glVertex3f(0,2,0);
+        
         glVertex3f(0,0,0);
+        
         glVertex3f(-1,3,0);
     glEnd();
     
@@ -308,47 +311,42 @@ void vatraDeo(float x){
 
 void vatra(void){
     
-    
     glPushMatrix();
-    
-    
-    /*GLfloat material_ambient[] = { 0.3, 0.3, 0.3, 1 };
-    GLfloat material_diffuse[] = { 1, 0.4, 0.4, 1 };
-    GLfloat material_specular[] = { 0, 0, 0, 1 };
-    GLfloat shininess = 20;
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material_ambient);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, material_diffuse);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular);
-    glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);*/
-    
-    
-    
+     
     glTranslatef(0,0.5,0);
     
     int i;
-    float j;
-    for(j=0; j<0.5 ;j+=0.01){ //popunjava prostor izmedju
-        glPushMatrix();
-        glTranslatef(0,0,j);
-        
-        for(i=0; i<NUMBER_OF_DOTS; i++){
-            glColor3f(1,0,0);
-            glBegin(GL_POINTS);
+
+    //popunjava prostor izmedju
+    glColor3f(1,0,0);
+    glBegin(GL_TRIANGLE_STRIP);
+    for(i=0; i<NUMBER_OF_DOTS; i++){
+        glVertex3f(cos(PI + i*PI/NUMBER_OF_DOTS),
+                sin(PI + i*PI/NUMBER_OF_DOTS),
+                0);
+        glVertex3f(cos(PI + i*PI/NUMBER_OF_DOTS),
+                sin(PI + i*PI/NUMBER_OF_DOTS),
+                0.5);
+    }
+    for(i=0; i<NUMBER_OF_DOTS; i++){
+        glVertex3f(-1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS),
+                2.5*sin(i*PI/NUMBER_OF_DOTS/3.4),
+                0);
+        glVertex3f(-1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS),
+                2.5*sin(i*PI/NUMBER_OF_DOTS/3.4),
+                0.5);
+    }
+    for(i=0; i<NUMBER_OF_DOTS; i++){
+        glVertex3f(1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS + PI - PI/3.45),
+                2.5*sin(i*PI/NUMBER_OF_DOTS/3.4 + PI - PI/3.45),
+                0);
+        glVertex3f(1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS+PI-PI/3.45),
+                2.5*sin(i*PI/NUMBER_OF_DOTS/3.4+PI-PI/3.45),
+                0.5);
+    }
             
-            glVertex3f(cos(PI + i*PI/NUMBER_OF_DOTS),
-                   sin(PI + i*PI/NUMBER_OF_DOTS),
-                   0);
-            glVertex3f(-1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS),
-                   2.5*sin(i*PI/NUMBER_OF_DOTS/3.4),
-                   0);
-            glVertex3f(1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS+PI-PI/3.4),
-                   2.5*sin(i*PI/NUMBER_OF_DOTS/3.4+PI-PI/3.4),
-                   0);
-            
-            glEnd(); 
-        }
-        glPopMatrix();
-    } 
+    glEnd(); 
+
     
     vatraDeo(0);
     
@@ -373,55 +371,13 @@ void vatra(void){
     
     glPopMatrix();
     
+    
     glPopMatrix();
 }
 
 void pahuljaDeo(void){
     
-    
-    
-    /*glColor3f(0.4,0.4,1);
-    glBegin(GL_POLYGON);
-    
-        glVertex3f(-0.2,0,0);
-        glVertex3f(0.2,0,0);
-        glVertex3f(0.2,2,0);
-        glVertex3f(-0.2,2,0);
-    
-    glEnd();
-    
-    
-    glPushMatrix();
-    
-    glTranslatef(0,1,0);
-    glRotatef(50, 0, 0, 1);
-    
-    glBegin(GL_POLYGON);
-    
-        glVertex3f(-0.15,0,0);
-        glVertex3f(0.15,0,0);
-        glVertex3f(0.15,1,0);
-        glVertex3f(-0.15,1,0);
-    
-    glEnd();
-    
-    glPopMatrix();
-    
-    glPushMatrix();
-    
-    glTranslatef(0,1,0);
-    glRotatef(-50, 0, 0, 1);
-    
-    glBegin(GL_POLYGON);
-    
-        glVertex3f(-0.15,0,0);
-        glVertex3f(0.15,0,0);
-        glVertex3f(0.15,1,0);
-        glVertex3f(-0.15,1,0);
-    
-    glEnd();
-    
-    glPopMatrix();*/
+
     glColor3f(0.4,0.4,1);
     glPushMatrix();
     
@@ -451,47 +407,13 @@ void pahuljaDeo(void){
 
 void pahulja(void){
     
-    /*glPushMatrix();
-    
-    GLfloat material_ambient[] = { 0.3, 0.3, 0.3, 1 };
-    GLfloat material_diffuse[] = { 0.4, 0.4, 1, 1 };
-    GLfloat material_specular[] = { 0, 0, 0, 1 };
-    GLfloat shininess = 20;
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material_ambient);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, material_diffuse);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material_specular);
-    glMaterialf(GL_FRONT_AND_BACK,  GL_SHININESS, shininess);
-    
-    
-    
-    
-    float j;
-    for(j=0; j<=0.5; j+= 0.01){
+    int i;
+    for (i=0; i<6; i++){
         glPushMatrix();
-        glTranslatef(0, 0, j);
-        int i;
-        for (i=0; i<6; i++){
-            glPushMatrix();
-            glRotatef(60*i, 0, 0,1);
-            pahuljaDeo();
-            glPopMatrix();
-        }
+        glRotatef(60*i, 0, 0,1);
+        pahuljaDeo();
         glPopMatrix();
     }
-     
-     
-    glPopMatrix();*/
-    
-    //glPushMatrix();
-    int i;
-        for (i=0; i<6; i++){
-            glPushMatrix();
-            glRotatef(60*i, 0, 0,1);
-            pahuljaDeo();
-            glPopMatrix();
-        }
-    //glPopMatrix();
-    
 }
 
 void magic_circle(float x, float z){
