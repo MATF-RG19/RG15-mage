@@ -266,42 +266,27 @@ void vatraDeo(float x){/*koriste se tri krive da bi se napravila osnova modela, 
     int i;
     glBegin(GL_POLYGON);
     glColor3f(1,x,0);
-<<<<<<< HEAD
+
     glNormal3f(0, 0, 1);
     //uglovi ogranicavamj koji deo kruga se izcrtava
-=======
->>>>>>> cd41a9b2ba5feac8acc64a8a0e3b7fd232e8f949
+
+
     for(i=0; i < NUMBER_OF_DOTS; i++){
         glVertex3f(cos(PI + i*PI/NUMBER_OF_DOTS),
                    sin(PI + i*PI/NUMBER_OF_DOTS),
                    0);
         
-<<<<<<< HEAD
     }
     for(i=0; i < NUMBER_OF_DOTS; i++){
         glVertex3f(-1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS),
                    2.5*sin(i*PI/NUMBER_OF_DOTS/3.4),
                    0);
     }
+
     for(i=0; i < NUMBER_OF_DOTS; i++){
-=======
-        
-        
-        glVertex3f(cos(PI + i*PI/NUMBER_OF_DOTS),
-                   sin(PI + i*PI/NUMBER_OF_DOTS),
-                   0);
-        }
-        for(i=0; i < NUMBER_OF_DOTS; i++){
-        glVertex3f(-1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS),
-                   2.5*sin(i*PI/NUMBER_OF_DOTS/3.4),
-                   0);
-        }
-        for(i=0; i < NUMBER_OF_DOTS; i++){
->>>>>>> cd41a9b2ba5feac8acc64a8a0e3b7fd232e8f949
         glVertex3f(1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS+PI-PI/3.4),
                    2.5*sin(i*PI/NUMBER_OF_DOTS/3.4+PI-PI/3.4),
                    0);
-        
     }
     glEnd();
 }
@@ -313,7 +298,6 @@ void vatra(void){
     glTranslatef(0,0.5,0);
     
     int i;
-<<<<<<< HEAD
 
     //omotac
     glColor3f(1,0,0);
@@ -344,33 +328,6 @@ void vatra(void){
     }
             
     glEnd(); 
-
-=======
-    float j;
-    /*for(j=0; j<0.5 ;j+=0.01){ //popunjava prostor izmedju
-        glPushMatrix();
-        glTranslatef(0,0,j);
-        glBegin(GL_POINTS);
-        for(i=0; i<NUMBER_OF_DOTS; i++){
-            glColor3f(1,0,0);
-        
-            
-            glVertex3f(cos(PI + i*PI/NUMBER_OF_DOTS),
-                   sin(PI + i*PI/NUMBER_OF_DOTS),
-                   0);
-            glVertex3f(-1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS),
-                   2.5*sin(i*PI/NUMBER_OF_DOTS/3.4),
-                   0);
-            glVertex3f(1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS+PI-PI/3.4),
-                   2.5*sin(i*PI/NUMBER_OF_DOTS/3.4+PI-PI/3.4),
-                   0);
-            
-            
-        }
-        glEnd(); 
-        glPopMatrix();
-    } */
->>>>>>> cd41a9b2ba5feac8acc64a8a0e3b7fd232e8f949
     
     vatraDeo(0);
     
@@ -397,48 +354,6 @@ void vatra(void){
     
     glPopMatrix();
 
-    glColor3f(1,0,0);
-    glBegin(GL_TRIANGLE_STRIP);
-        for(i = 0; i < NUMBER_OF_DOTS; i++){
-            glVertex3f(cos(PI + i*PI/NUMBER_OF_DOTS),
-                   sin(PI + i*PI/NUMBER_OF_DOTS),
-                   0);
-            glPushMatrix();
-            //glTranslatef(0,0.5,0);
-            glVertex3f(cos(PI + i*PI/NUMBER_OF_DOTS),
-                   sin(PI + i*PI/NUMBER_OF_DOTS),
-                   0.5);
-            glPopMatrix();
-        }
-        for(i = 0; i < NUMBER_OF_DOTS; i++){
-            glVertex3f(-1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS),
-                   2.5*sin(i*PI/NUMBER_OF_DOTS/3.4),
-                   0);
-            //glTranslatef(0,0.5,0);
-            glVertex3f(-1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS),
-                   2.5*sin(i*PI/NUMBER_OF_DOTS/3.4),
-                   0.5);
-            glPopMatrix();
-        }
-        for(i = 0; i < NUMBER_OF_DOTS; i++){
-            glVertex3f(1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS+PI-PI/3.4),
-                   2.5*sin(i*PI/NUMBER_OF_DOTS/3.4+PI-PI/3.4),
-                   0);
-            //glTranslatef(0,0.5,0);
-            glVertex3f(1.5 + 2.5*cos(i*PI/3.4/NUMBER_OF_DOTS+PI-PI/3.4),
-                   2.5*sin(i*PI/NUMBER_OF_DOTS/3.4+PI-PI/3.4),
-                   0.5);
-            glPopMatrix();
-        }
-    glEnd();
-
-
-
-
-
-
-    
-    
     glPopMatrix();
 }
 
