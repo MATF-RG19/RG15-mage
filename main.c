@@ -28,7 +28,7 @@ int parametar_magije = 1;
 static float tmpx;
 static float tmpz;
 
-Magija niz;
+Magija magija;
 
 GLuint names[3];
 
@@ -62,18 +62,11 @@ int main(int argc, char **argv){
     animacija_kretanja = 1;
 
     
-    niz.aktivno = 0;
-    /*glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);*/
-    
-    
+    magija.aktivno = 0;
     
     glEnable(GL_COLOR_MATERIAL);
     
-    
-    
     initialize();
-    
     
     glClearColor(0, 0, 0, 0);
     glutMainLoop();
@@ -121,12 +114,12 @@ static void on_keyboard(unsigned char key, int x, int y){
         break;
     case 'f':
     case 'F':
-        if(!niz.aktivno){
+        if(!magija.aktivno){ //zapocinje animaciju pucanja
             if(element){
                 brojac = 0;
-                niz.aktivno = 1;
-                niz.x = _x;
-                niz.z = _z;
+                magija.aktivno = 1;
+                magija.x = _x;
+                magija.z = _z;
                 parametar_magije = 1;
             }
         }
@@ -134,12 +127,12 @@ static void on_keyboard(unsigned char key, int x, int y){
         
     case 'r':
     case 'R':
-        if(!niz.aktivno){
-            if(_x > -33.33 && _x < -28.33 && _z > -26.33 && _z < -22.33){
+        if(!magija.aktivno){ //bira se magija u odnosu na to gde se nalazi lik
+            if(_x > -33.33 && _x < -28.33 && _z > -26.33 && _z < -21.33){
                 element = VATRA;
-            } else if(_x > -1 && _x < 3 && _z > -26.33 && _z < -22.33){
+            } else if(_x > -1 && _x < 3 && _z > -26.33 && _z < -21.33){
                 element = LED;
-            } else if(_x > 31.33 && _x < 35.33 && _z > -26.33 && _z < -22.33){
+            } else if(_x > 31.33 && _x < 35.33 && _z > -26.33 && _z < -21.33){
                 element = MUNJA;
             }
         }
@@ -215,7 +208,9 @@ static void on_display(void){
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+    
     kolizija1();
+    
     gluLookAt(
             1+_x, 6.5, _z,
             1+_x + cos(_fi), 6.5, _z + sin(_fi),
@@ -225,24 +220,32 @@ static void on_display(void){
     
     scena();
     
-
+    //meta
     glPushMatrix();
+    glTranslatef(0, 0, 50);
+    glScalef(0.8, 0.8, 0.8);
+    modelLika(1);
+    glPopMatrix();
+    
+    
+    glPushMatrix();
+    //kretanje i rotiranje
     glTranslatef(1+_x, 0, 0+_z);
     glRotatef(-(_fi/PI*180-90), 0, 1, 0);
-    modelLika();
+    modelLika(0);
     
-    if(element){
-        
+    if(element){//pucanje ako je izabran neki element
         
         glPushMatrix();
         
-        switch(element){
+        switch(element){ //boja kruga oko stapica
             case VATRA: glColor3f(1,0,0); break;
             case LED: glColor3f(0.4,0.4,1); break;
             case MUNJA: glColor3f(1,1,0); break;
             default: break;
         }
         
+        //pozicioniranje kruga i njegova animacija
         glRotatef(5, 1, 0, 0);
         glRotatef(-5, 0, 0, 1);
         
@@ -257,18 +260,20 @@ static void on_display(void){
     }
     glPopMatrix();
     
+    //postavljanje modela munje
     glPushMatrix();
     glTranslatef(33.33, 6.5 + sin(parametar_animacije/50.0), -29.08);
     glRotatef(180, 0, 1,0);
     munja_model();
     glPopMatrix();
     
+    //postavljanje modela vatre
     glPushMatrix();
     glTranslatef(-29.33, 7 + sin((parametar_animacije+50)/50.0), -29.58);
     vatra();
     glPopMatrix();
     
-    
+    //postavljanje modela pahulje
     glPushMatrix();
     glTranslatef(2, 6.5 + sin((parametar_animacije+100)/50.0), -29.58);
     glScalef(0.7, 0.7, 1);
@@ -276,20 +281,6 @@ static void on_display(void){
     pahulja();
     glPopMatrix();
     
-    
-    //kvadrat
-    /*glPushMatrix();
-    
-    glTranslatef(31.33, 0 , -31.33);
-    glColor3f(0,0,0);
-    glBegin(GL_LINE_LOOP);
-        glVertex3f(2,0.2,2);
-        glVertex3f(2,0.2,-2);
-        glVertex3f(-2,0.2,-2);
-        glVertex3f(-2,0.2,2);
-    
-    glEnd();
-    glPopMatrix();*/
     
     altar(-31.33, -31.33);
     altar(0, -31.33);
@@ -300,34 +291,34 @@ static void on_display(void){
     magic_circle(2, -24.33);
     magic_circle(33.33, -24.33);
     
+    //nalazi se na krugu za pucanje magija
     double clip_plane[] = {vektorZ[0], 0, vektorZ[1], -(vektorZ[0]*_x + vektorZ[1]*_z + 10)};
     glClipPlane(GL_CLIP_PLANE0, clip_plane);
     
+    //odseca deo munje
     double clip_plane2[] = {-vektorZ[0], 0, -vektorZ[1], (vektorZ[0]*_x + vektorZ[1]*_z + sqrt(tmpx*tmpx + tmpz*tmpz))};
     glClipPlane(GL_CLIP_PLANE1, clip_plane2);
     
     
-    if(brojac>=50 && niz.aktivno){
+    if(brojac>=50 && magija.aktivno){
         
         if(element == MUNJA){
             if(brojac >= 70){
-                niz.aktivno = 0;
+                magija.aktivno = 0;
             }
+            
+            /*izracunavaju se koordinate clipping regiona da bi se izracunala njegova udaljenost*/
             if(brojac == 50){
                 tmpx = fabs(10*cos(_fi));
                 tmpz = fabs(10*sin(_fi));
             }
             while(!kolizija2()){
-                tmpx += fabs(niz.vec_x);
-                tmpz += fabs(niz.vec_z);
-                niz.x += niz.vec_x;
-                niz.z += niz.vec_z;
+                tmpx += fabs(magija.vec_x);
+                tmpz += fabs(magija.vec_z);
+                magija.x += magija.vec_x;
+                magija.z += magija.vec_z;
             }
-            
-            printf("%f %f\n", niz.x, niz.z);
-            
-            
-            
+                    
             glEnable(GL_CLIP_PLANE1);
             glPushMatrix();
             
@@ -340,10 +331,14 @@ static void on_display(void){
         } else {
             glPushMatrix();
                 glEnable(GL_CLIP_PLANE0);
+                
+                //gasi clipping region kada se ledenica zaustavi
                 if(kolizija2()){
                     glDisable(GL_CLIP_PLANE0);
                 }
-                glTranslatef(niz.x+1, 3, niz.z);
+                
+                //kretanje magija
+                glTranslatef(magija.x+1, 3, magija.z);
                 
                 switch(element){
                     case VATRA:
@@ -375,48 +370,23 @@ static void on_display(void){
         glPointSize(1);
         glLineWidth(1);
         if(kolizija2()){
-            niz.vec_x = 0;
-            niz.vec_z = 0;
+            magija.vec_x = 0;
+            magija.vec_z = 0;
         }
-    } else if(niz.aktivno){
+    } else if(magija.aktivno){/*animacija povecavanja kruga i pampte se odgovarajuce vrednosti koje se koriste za pucanje magije*/
         glPointSize(3);
         glLineWidth(5);
         magic_circle2(1+_x + 10*cos(_fi), _z + 10*sin(_fi));
         glPointSize(1);
         glLineWidth(1);
-        niz.x = _x + 10*cos(_fi);;
-        niz.z = _z + 10*sin(_fi);
-        niz.vec_x = vektorZ[0];
-        niz.vec_z = vektorZ[1];
+        
+        magija.x = _x + 10*cos(_fi);;
+        magija.z = _z + 10*sin(_fi);
+        magija.vec_x = vektorZ[0];
+        magija.vec_z = vektorZ[1];
         ugao2 = _fi;
     }
-    
-    
-    
-    
-    //ose
-    
-   /* glColor3f(1, 0, 0);
-    glBegin(GL_LINES);
-        glVertex3f(0, 0, 0);
-        glVertex3f(10000, 0, 0);
-    glEnd();
-    
-    glColor3f(1, 0, 0);
-    glBegin(GL_LINES);
-        glVertex3f(0, 0, 0);
-        glVertex3f(0, 10000, 0);
-    glEnd();
-    
-    glColor3f(1, 0, 0);
-    glBegin(GL_LINES);
-        glVertex3f(0, 0, 0);
-        glVertex3f(0, 0, 10000);
-    glEnd();*/
-    
-
-
-    
+       
     glutSwapBuffers();
 }
 

@@ -9,8 +9,7 @@ void on_timer(int value){
     
     parametar_animacije++;
 
-    
-    
+    //kretanje
     switch(smer_kretanja){
         case LEVO:
             _x += vektorX[0];
@@ -33,10 +32,10 @@ void on_timer(int value){
             break;
     }
     
-    
+    //rotiranje kamere
     switch(smer_rotiranja){
         case DESNO:
-            _fi += 0.05;//0.5
+            _fi += 0.05;
             ugao -= 0.05;
             vektorX[0] = cos(ugao);
             vektorX[1] = -sin(ugao);
@@ -55,12 +54,12 @@ void on_timer(int value){
             break;
     }
     
-    if(niz.aktivno){
+    if(magija.aktivno){
         if(brojac < 50){
             brojac++; 
         } else {
-            niz.x += niz.vec_x*1.5;
-            niz.z += niz.vec_z*1.5;
+            magija.x += magija.vec_x*1.5;
+            magija.z += magija.vec_z*1.5;
             brojac++;
         }
     }
@@ -72,12 +71,12 @@ void on_timer(int value){
     switch(element){
         case VATRA: 
             if(parametar_magije == 8){
-                niz.aktivno = 0;
+                magija.aktivno = 0;
             }
             break;
         case LED:
             if(parametar_magije == 50){
-                niz.aktivno = 0;
+                magija.aktivno = 0;
             }
     }
     
@@ -89,16 +88,5 @@ void on_timer(int value){
     }
 }
 
-/*void on_timer_magija (int value){
-    if (value != TIMER_MAGIJA_ID)
-        return;
-    
-    int i;
-    for(i = 0; i<100000000; i++);
-
-    if (animacija_magija) {
-        glutTimerFunc(TIMER_INTERVAL, on_timer_magija, TIMER_MAGIJA_ID);
-    }
-}*/
 
 

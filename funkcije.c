@@ -33,13 +33,6 @@ void initialize(void){ // preuzeto sa casa
     
     Image * image;
 
-    
-    //glClearColor(0, 0, 0, 0);
-
-    
-    //glEnable(GL_DEPTH_TEST);
-
-    
     glEnable(GL_TEXTURE_2D);
 
     glTexEnvf(GL_TEXTURE_ENV,
@@ -187,37 +180,75 @@ void kolizija1(void){
         }
     }
     
-    if(_z >= -35 && _z <= -24 && _x <= 29.33){
+    if(_z >= 49 && _z <= -24 && _x <= 29.33){
         if(_x >= 24){
             _x = 24;
         }
     }
+    
+    //--------
+    
+    
+    if(_x <= 6 && _x >= -7 && _z <= 49){
+        if(_z >= 44 ){
+            _z = 44;
+        }
+    }
+    
+    if(_x <= 6 && _x >= -7 && _z >= 52){
+        if(_z <= 57){
+            _z = 57;
+        }
+    }
+    
+    if(_z >= 45 && _z <= 56 && _x <= -3){
+        if(_x >= -8){
+            _x = -8;
+        }
+    }
+    
+    if(_z >= 45 && _z <= 56 && _x >= 2){
+        if(_x <= 7){
+            _x = 7;
+        }
+    }
+    
+    /*if(magija.x >= 30 && magija.x <= 35.33 && magija.z <= -27.33 && magija.z >= -31.33){
+            return 1;
+    }*/
+    /*if(magija.x >= -3 && magija.x <= 2 && magija.z <= 52 && magija.z >= 49){
+            return 1;
+    }*/
 }
 
 int kolizija2(void){
     
-    if(niz.x <= -50){
+    if(magija.x <= -50){
         return 1;
     }
-    if(niz.z <= -49){
+    if(magija.z <= -49){
         return 1;
     }
-    if(niz.x >= 48){
+    if(magija.x >= 48){
         return 1;
     }
-    if(niz.z >= 99){
+    if(magija.z >= 99){
         return 1;
     }
     
-    if(niz.x >= -32.66 && niz.x <= -27.33 && niz.z <= -27.33 && niz.z >= -31.33){
+    if(magija.x >= -32.66 && magija.x <= -27.33 && magija.z <= -27.33 && magija.z >= -31.33){
             return 1;
     }
     
-    if(niz.x >= -1 && niz.x <= 4 && niz.z <= -27.33 && niz.z >= -31.33){
+    if(magija.x >= -1 && magija.x <= 4 && magija.z <= -27.33 && magija.z >= -31.33){
             return 1;
     }
     
-    if(niz.x >= 30 && niz.x <= 35.33 && niz.z <= -27.33 && niz.z >= -31.33){
+    if(magija.x >= 30 && magija.x <= 35.33 && magija.z <= -27.33 && magija.z >= -31.33){
+            return 1;
+    }
+    
+    if(magija.x >= -3 && magija.x <= 2 && magija.z <= 52 && magija.z >= 49){
             return 1;
     }
 

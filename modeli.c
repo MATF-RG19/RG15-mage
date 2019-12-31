@@ -1,106 +1,93 @@
 #include <stdlib.h>
 #include "header.h"
 
-void modelLika(void){
+void modelLika(int k){
     
     //desna ruka
     glPushMatrix();
-    glColor3f(0, 0, 1);
+    glColor3f(0.5, 0.5, 0.5);
     glTranslatef(-1, 2.5, 0);
     glScalef(1, 3, 1);
     glTranslatef(-0.5, 0.5, 0.5);
     glutSolidCube(1);
-    
-    glColor3f(0, 0, 0);
-    glutWireCube(1);
     glPopMatrix();
     
     //leva ruka
     glPushMatrix();
-    glColor3f(0, 0, 1);
+    glColor3f(0.5, 0.5, 0.5);
     glTranslatef(1, 2.5, 0);
     glScalef(1, 3, 1);
     glTranslatef(0.5, 0.5, 0.5);
     glutSolidCube(1);
-    
-    glColor3f(0, 0, 0);
-    glutWireCube(1);
     glPopMatrix();
     
     //glava
-    /*glPushMatrix();
-    glColor3f(0, 0, 1);
-    glTranslatef(0, 6, 0.5);
-    glutSolidCube(1);
-    
-    glColor3f(0, 0, 0);
-    glutWireCube(1);
-    glPopMatrix();*/
+    if(k){
+        glPushMatrix();
+        glColor3f(0.7, 0.7, 0.7);
+        glTranslatef(0, 6.1, 0.5);
+        glScalef(1.2, 1.2, 1);
+        glutSolidCube(1);
+        glPopMatrix();
+    }
     
         
     //torzo
     glPushMatrix();
-    glColor3f(0, 1, 0);
+    glColor3f(0.3, 0.3, 0.3);
     glTranslatef(0, 3, 0);
     glScalef(2, 2.5, 1);
     glTranslatef(0, 0.5, 0.5);
     glutSolidCube(1);
-    
-    glColor3f(0, 0, 0);
-    glutWireCube(1);
     glPopMatrix();
     
     
     //desna noga
     glPushMatrix();
-    glColor3f(0, 0, 1);
+    glColor3f(0.8, 0.8, 0.8);
     glScalef(1, 3, 1);
     glTranslatef(-0.5, 0.5, 0.5);
     glutSolidCube(1);
-    
-    glColor3f(0, 0, 0);
-    glutWireCube(1);
     glPopMatrix();
     
     
     //leva noga
     glPushMatrix();
-    glColor3f(0, 0, 1);
+    glColor3f(0.8, 0.8, 0.8);
     glScalef(1, 3, 1);
     glTranslatef(0.5, 0.5, 0.5);
     glutSolidCube(1);
-    
-    glColor3f(0, 0, 0);
-    glutWireCube(1);
     glPopMatrix();
     
     //stapic
-    glPushMatrix();
-    
-    glRotatef(5, 1, 0, 0);
-    glRotatef(-5, 0, 0, 1);
-    
-    glPushMatrix();
-    glColor3f(0, 0, 0);
-    glTranslatef(-1.7, 4, 3);
-    glScalef(0.3, 1.6, 0.3);
-    glTranslatef(0, 0.5, 0.5);
-    glutSolidCube(1);
-    glPopMatrix();
-    
-    
-    glPushMatrix();
-    
-    glColor3f(1,1,1);
-    glTranslatef(-1.7, 5.6, 3);
-    glScalef(0.3, 0.4, 0.3);
-    glTranslatef(0, 0.5, 0.5);
-    glutSolidCube(1);
-    
-    glPopMatrix();
-    
-    
-    glPopMatrix();
+    if(!k){
+        glPushMatrix();
+        
+        glRotatef(5, 1, 0, 0);
+        glRotatef(-5, 0, 0, 1);
+        
+        glPushMatrix();
+        glColor3f(0, 0, 0);
+        glTranslatef(-1.7, 4, 3);
+        glScalef(0.3, 1.6, 0.3);
+        glTranslatef(0, 0.5, 0.5);
+        glutSolidCube(1);
+        glPopMatrix();
+        
+        
+        glPushMatrix();
+        
+        glColor3f(1,1,1);
+        glTranslatef(-1.7, 5.6, 3);
+        glScalef(0.3, 0.4, 0.3);
+        glTranslatef(0, 0.5, 0.5);
+        glutSolidCube(1);
+        
+        glPopMatrix();
+        
+        
+        glPopMatrix();
+    }
 }
 
 void altar(float x, float z){
@@ -129,8 +116,6 @@ void altar(float x, float z){
         glColor3f(0.8,0.8,0.8);
         glutSolidCube(1);
         
-
-    
     glPopMatrix();
     
     
@@ -150,9 +135,7 @@ void altar(float x, float z){
     
 }
 
-void munja_model(void){
-    
-    
+void munja_model(void){//poligoni
     
     glPushMatrix();
 
@@ -255,10 +238,6 @@ void munja_model(void){
         glVertex3f(0,5,0);
     glEnd();
     
-    
- 
-    
-    
     glPushMatrix();
     glTranslatef(0, 0, 0.5);
     glBegin(GL_POLYGON);
@@ -278,17 +257,17 @@ void munja_model(void){
         glVertex3f(-1,3,0);
     glEnd();
     
-    
-   
     glPopMatrix();
     
     glPopMatrix();
 }
 
-void vatraDeo(float x){
+void vatraDeo(float x){/*koriste se tri krive da bi se napravila osnova modela, prosledjena vrednost je za boju*/
     int i;
     glBegin(GL_POLYGON);
     glColor3f(1,x,0);
+    glNormal3f(0, 0, 1);
+    //uglovi ogranicavamj koji deo kruga se izcrtava
     for(i=0; i < NUMBER_OF_DOTS; i++){
         glVertex3f(cos(PI + i*PI/NUMBER_OF_DOTS),
                    sin(PI + i*PI/NUMBER_OF_DOTS),
@@ -352,12 +331,14 @@ void vatra(void){
     
     glPushMatrix();
     glTranslatef(0,0,-0.01);
+    //zuti deo modela vatre
     glScalef(0.5, 0.5, 1);
     vatraDeo(1);
     glPopMatrix();
     
     glPushMatrix();
     
+    //prednja strana modela
     glTranslatef(0,0, 0.5);
     glRotatef(180, 0, 1, 0);
     
@@ -525,7 +506,6 @@ void munjaDeo(void){
     glColor3f(1,1,0);
     glPushMatrix();
     
-    //glTranslatef(0, 3, 0);
     glRotatef(40, 0, 0, 1);
     glBegin(GL_LINE_STRIP);
         glVertex3f(0, 0, 0);

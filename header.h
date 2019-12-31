@@ -23,7 +23,7 @@
 
 //funkcije--------------------------------
 
-void modelLika(void);
+void modelLika(int k);
 void scena(void);
 void altar(float x, float z);
 void munja_model(void);
@@ -71,7 +71,7 @@ typedef struct Magija {
     float vec_z;
 }Magija;
 
-extern Magija niz;
+extern Magija magija;
 
 
 #endif
