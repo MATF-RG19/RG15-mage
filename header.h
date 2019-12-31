@@ -38,7 +38,8 @@ void magic_circle2(float x, float z);
 void on_timer_magija(int value);
 void led(void);
 void initialize(void);
-void kolizija(void);
+void kolizija1(void);
+int kolizija2(void);
 
 
 //promenljive-----------------------------
@@ -55,6 +56,8 @@ extern int smer_kretanja;
 extern int smer_rotiranja;
 extern float parametar_animacije;
 extern int brojac;
+extern int element;
+extern int parametar_magije;
 
 extern GLuint names[3];
 

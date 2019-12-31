@@ -59,14 +59,26 @@ void on_timer(int value){
         if(brojac < 50){
             brojac++; 
         } else {
-            niz.x += niz.vec_x*1.5;
-            niz.z += niz.vec_z*1.5;
+            niz.x += niz.vec_x;
+            niz.z += niz.vec_z;
             brojac++;
         }
     }
     
-    if(niz.z > 100){
-        niz.aktivno = 0;
+    if(kolizija2()){
+        parametar_magije++;
+    }
+    
+    switch(element){
+        case VATRA: 
+            if(parametar_magije == 8){
+                niz.aktivno = 0;
+            }
+            break;
+        case LED:
+            if(parametar_magije == 50){
+                niz.aktivno = 0;
+            }
     }
     
     

@@ -23,7 +23,8 @@ int smer_rotiranja = 0;
 float parametar_animacije = 0;
 int brojac = 0;
 static float ugao2 = PI/2;
-static int element = 0;
+int element = 1;
+int parametar_magije = 1;
 
 Magija niz;
 
@@ -117,12 +118,15 @@ static void on_keyboard(unsigned char key, int x, int y){
         
         break;
     case 'f':
-    case 'F': 
-        if(element){
-            brojac = 0;
-            niz.aktivno = 1;
-            niz.x = _x;
-            niz.z = _z;
+    case 'F':
+        if(!niz.aktivno){
+            if(element){
+                brojac = 0;
+                niz.aktivno = 1;
+                niz.x = _x;
+                niz.z = _z;
+                parametar_magije = 1;
+            }
         }
         break;
         
@@ -205,7 +209,7 @@ static void on_display(void){
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    kolizija();
+    kolizija1();
     gluLookAt(
             1+_x, 6.5, _z,
             1+_x + cos(_fi), 6.5, _z + sin(_fi),
@@ -274,7 +278,7 @@ static void on_display(void){
     //kvadrat
     /*glPushMatrix();
     
-    glTranslatef(-29.33, 0 , -24.33);
+    glTranslatef(31.33, 0 , -31.33);
     glColor3f(0,0,0);
     glBegin(GL_LINE_LOOP);
         glVertex3f(2,0.2,2);
@@ -285,7 +289,6 @@ static void on_display(void){
     glEnd();
     glPopMatrix();*/
     
-    
     altar(-31.33, -31.33);
     altar(0, -31.33);
     altar(31.33, -31.33);
@@ -295,7 +298,7 @@ static void on_display(void){
     magic_circle(2, -24.33);
     magic_circle(33.33, -24.33);
     
-    double clip_plane[] = {vektorZ[0], 0, vektorZ[1], -(vektorZ[0]*_x+vektorZ[1]*_z+10)};
+    double clip_plane[] = {vektorZ[0], 0, vektorZ[1], -(vektorZ[0]*_x + vektorZ[1]*_z + 10)};
 
     glClipPlane(GL_CLIP_PLANE0, clip_plane);
     
@@ -304,12 +307,18 @@ static void on_display(void){
     if(brojac>=50 && niz.aktivno){
         glPushMatrix();
             glEnable(GL_CLIP_PLANE0);
-            glTranslatef(niz.x+1 + 10*cos(_fi), 3, niz.z + 10*sin(_fi));
+            if(kolizija2()){
+                glDisable(GL_CLIP_PLANE0);
+            }
+            glTranslatef(niz.x+1, 3, niz.z);
             
             switch(element){
                 case VATRA:
+                    glPushMatrix();
                     glColor3f(1,0,0);
+                    glScalef(parametar_magije, parametar_magije, parametar_magije);
                     glutSolidSphere(1, 30, 30);
+                    glPopMatrix();
                     break;
                     
                 case LED:
@@ -330,14 +339,18 @@ static void on_display(void){
         
         glPointSize(1);
         glLineWidth(1);
+        if(kolizija2()){
+            niz.vec_x = 0;
+            niz.vec_z = 0;
+        }
     } else if(niz.aktivno){
         glPointSize(3);
         glLineWidth(5);
         magic_circle2(1+_x + 10*cos(_fi), _z + 10*sin(_fi));
         glPointSize(1);
         glLineWidth(1);
-        niz.x = _x;
-        niz.z = _z;
+        niz.x = _x + 10*cos(_fi);;
+        niz.z = _z + 10*sin(_fi);
         niz.vec_x = vektorZ[0];
         niz.vec_z = vektorZ[1];
         ugao2 = _fi;
