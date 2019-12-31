@@ -208,9 +208,12 @@ static void on_display(void){
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+<<<<<<< HEAD
     
     kolizija1();
     
+=======
+>>>>>>> cd41a9b2ba5feac8acc64a8a0e3b7fd232e8f949
     gluLookAt(
             1+_x, 6.5, _z,
             1+_x + cos(_fi), 6.5, _z + sin(_fi),
